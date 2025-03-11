@@ -1,7 +1,5 @@
-"use client"
-
-import { useState, useEffect, useRef } from "react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect, useRef } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Play,
   ChevronRight,
@@ -13,108 +11,126 @@ import {
   Users,
   ArrowUpRight,
   Sparkles,
-} from "lucide-react"
+} from "lucide-react";
+import hero from "../../assets/Landing/hero.webp";
 
 // Compact CountUp component
 const CountUp = ({ end, duration = 2000 }) => {
-  const [count, setCount] = useState(0)
-  const elementRef = useRef(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const [count, setCount] = useState(0);
+  const elementRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
     if (elementRef.current) {
-      observer.observe(elementRef.current)
+      observer.observe(elementRef.current);
     }
 
     return () => {
       if (elementRef.current) {
-        observer.unobserve(elementRef.current)
+        observer.unobserve(elementRef.current);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible) return;
 
-    let startTime
-    let animationFrame
+    let startTime;
+    let animationFrame;
 
-    const startVal = 0
-    const endVal = end
+    const startVal = 0;
+    const endVal = end;
 
     const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp
-      const progress = Math.min((timestamp - startTime) / duration, 1)
-      const currentCount = Math.floor(progress * (endVal - startVal) + startVal)
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const currentCount = Math.floor(
+        progress * (endVal - startVal) + startVal
+      );
 
-      setCount(currentCount)
+      setCount(currentCount);
 
       if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate)
+        animationFrame = requestAnimationFrame(animate);
       }
-    }
+    };
 
-    animationFrame = requestAnimationFrame(animate)
+    animationFrame = requestAnimationFrame(animate);
 
-    return () => cancelAnimationFrame(animationFrame)
-  }, [end, duration, isVisible])
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration, isVisible]);
 
-  return <span ref={elementRef}>{count.toLocaleString()}</span>
-}
+  return <span ref={elementRef}>{count.toLocaleString()}</span>;
+};
 
 const Hero = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const statsRef = useRef(null)
-  const [statsVisible, setStatsVisible] = useState(false)
-  const videoSectionRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const statsRef = useRef(null);
+  const [statsVisible, setStatsVisible] = useState(false);
+  const videoSectionRef = useRef(null);
 
   // Animation on mount
   useEffect(() => {
-    setIsVisible(true)
+    setIsVisible(true);
 
     // Auto-rotate testimonial highlights
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % 3)
-    }, 3000)
+      setActiveIndex((prev) => (prev + 1) % 3);
+    }, 3000);
 
     // Detect when stats section is visible
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setStatsVisible(true)
+          setStatsVisible(true);
         }
       },
-      { threshold: 0.2 },
-    )
+      { threshold: 0.2 }
+    );
 
     if (statsRef.current) {
-      observer.observe(statsRef.current)
+      observer.observe(statsRef.current);
     }
 
     return () => {
-      clearInterval(interval)
+      clearInterval(interval);
       if (statsRef.current) {
-        observer.unobserve(statsRef.current)
+        observer.unobserve(statsRef.current);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   // Animated stats
   const stats = [
-    { number: "12", label: "Years Experience", delay: "0", icon: <Clock className="w-4 h-4" /> },
-    { number: "83K", label: "Projects", delay: "150", icon: <CheckSquare className="w-4 h-4" /> },
-    { number: "4.2K", label: "Clients", delay: "300", icon: <Users className="w-4 h-4" /> },
-  ]
+    {
+      number: "12",
+      label: "Years Experience",
+      delay: "0",
+      icon: <Clock className="w-5 h-5 sm:w-6 sm:h-6" />,
+    },
+    {
+      number: "83K",
+      label: "Projects Completed",
+      delay: "150",
+      icon: <CheckSquare className="w-5 h-5 sm:w-6 sm:h-6" />,
+    },
+    {
+      number: "4.2K",
+      label: "Clients Worldwide",
+      delay: "300",
+      icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" />,
+    },
+  ];
 
   return (
     <section className="bg-primary text-white px-5 md:px-8 py-10 md:py-16 relative overflow-hidden">
@@ -142,7 +158,11 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row gap-6 md:gap-10 lg:gap-16 mb-10 md:mb-14">
           {/* Left Column */}
           <div
-            className={`w-full lg:w-1/2 transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+            className={`w-full lg:w-1/2 transition-all duration-1000 transform ${
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
           >
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full mb-4 md:mb-6 border border-white/10 hover:border-white/20 transition-all duration-300 group">
               <div className="w-1.5 h-1.5 bg-secondary rounded-full animate-ping"></div>
@@ -159,16 +179,20 @@ const Hero = () => {
                   className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary/30 rounded-full transition-all duration-1000"
                   style={{ width: isVisible ? "100%" : "0%" }}
                 ></span>
-                <span className="absolute -top-1 -right-1 w-2 h-2 text-secondary">
-                  <Star className="w-full h-full fill-secondary animate-spin-slow" />
+                <span className="absolute top-0 -right-5 w-5 h-5 text-secondary">
+                  <Star className="w-full h-full fill-secondary hidden md:block animate-spin-slow" />
                 </span>
               </span>
               <br className="hidden md:block" />
               <span className="relative">
+                {" "}
                 Digital Agency
                 <span
                   className="absolute -bottom-1 right-0 w-0 h-0.5 bg-white/30 rounded-full transition-all duration-1000"
-                  style={{ width: isVisible ? "40%" : "0%", transitionDelay: "0.5s" }}
+                  style={{
+                    width: isVisible ? "52%" : "0%",
+                    transitionDelay: "0.5s",
+                  }}
                 ></span>
               </span>
             </h1>
@@ -205,15 +229,28 @@ const Hero = () => {
                 style={{ transform: `translateY(-${activeIndex * 100}%)` }}
               >
                 {[
-                  { text: "Transformed our digital presence completely", author: "John D., CEO" },
-                  { text: "Innovative solutions that drive real results", author: "Sarah M., Marketing" },
-                  { text: "The most creative team we've worked with", author: "Alex T., Product" },
+                  {
+                    text: "Transformed our digital presence completely",
+                    author: "John D., CEO",
+                  },
+                  {
+                    text: "Innovative solutions that drive real results",
+                    author: "Sarah M., Marketing",
+                  },
+                  {
+                    text: "The most creative team we've worked with",
+                    author: "Alex T., Product",
+                  },
                 ].map((testimonial, idx) => (
                   <div key={idx} className="flex items-center gap-2 p-3 h-12">
                     <CheckCircle className="text-secondary w-4 h-4 flex-shrink-0" />
                     <div>
-                      <p className="text-white/90 text-xs">{testimonial.text}</p>
-                      <p className="text-white/60 text-[10px]">{testimonial.author}</p>
+                      <p className="text-white/90 text-xs">
+                        {testimonial.text}
+                      </p>
+                      <p className="text-white/60 text-[10px]">
+                        {testimonial.author}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -224,7 +261,9 @@ const Hero = () => {
                 {[0, 1, 2].map((idx) => (
                   <button
                     key={idx}
-                    className={`w-1 h-1 rounded-full transition-all duration-300 ${activeIndex === idx ? "bg-secondary w-2" : "bg-white/30"}`}
+                    className={`w-1 h-1 rounded-full transition-all duration-300 ${
+                      activeIndex === idx ? "bg-secondary w-2" : "bg-white/30"
+                    }`}
                     onClick={() => setActiveIndex(idx)}
                   />
                 ))}
@@ -234,89 +273,70 @@ const Hero = () => {
 
           {/* Right Column */}
           <div
-            className={`w-full lg:w-1/2 mt-6 lg:mt-0 transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+            className={`w-full lg:w-1/2 sm:mt-6 lg:mt-0 transition-all duration-1000 transform ${
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
             style={{ transitionDelay: "300ms" }}
           >
             <p className="text-white/90 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
-              We are a <span className="text-secondary font-medium">creative agency</span> with several services that
-              focused on quality and innovations for your business. We transform ideas into exceptional digital
+              We are a{" "}
+              <span className="text-secondary font-medium">
+                creative agency
+              </span>{" "}
+              with several services that focused on quality and innovations for
+              your business. We transform ideas into exceptional digital
               experiences.
             </p>
 
             {/* Compact statistics section with reduced height */}
-            <div ref={statsRef} className="mt-6 relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary/5 to-transparent rounded-xl transform rotate-1 scale-105 blur-sm"></div>
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-secondary/5 relative z-10">
-                <div className="grid grid-cols-3 gap-4">
-                  {stats.map((stat, index) => (
-                    <div
-                      key={index}
-                      className={`relative group transition-all duration-1000 transform ${statsVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-                      style={{ transitionDelay: `${Number.parseInt(stat.delay) + 300}ms` }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transform scale-105 transition-all duration-300 -z-10"></div>
-
-                      <div className="text-center p-2 rounded-lg transition-all duration-300 transform group-hover:-translate-y-1">
-                        <div className="flex items-center justify-center gap-1.5 mb-1">
-                          <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-secondary group-hover:bg-secondary/20 transition-all duration-300">
-                            {stat.icon}
-                          </div>
-                          <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-white/90 to-white/80 bg-clip-text text-transparent">
-                            <CountUp end={Number.parseInt(stat.number.replace(/[^0-9]/g, ""))} />
-                            <span className="text-secondary text-xl md:text-2xl font-bold">+</span>
-                          </span>
-                        </div>
-
-                        <p className="text-xs text-white/70 font-medium group-hover:text-white/90 transition-colors duration-300">
-                          {stat.label}
-                        </p>
-
-                        {/* Circular progress indicator - simplified */}
-                        <svg
-                          className="absolute inset-0 w-full h-full -z-10 opacity-20 group-hover:opacity-100 transition-opacity duration-300"
-                          viewBox="0 0 100 100"
-                        >
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="45"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            className="text-white/10"
-                          />
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="45"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeDasharray="283"
-                            strokeDashoffset={283 - (283 * (index + 1)) / 4}
-                            className="text-secondary transform -rotate-90 origin-center transition-all duration-1000"
-                            style={{
-                              strokeDashoffset: statsVisible ? 283 - (283 * (index + 1)) / 4 : 283,
-                              transitionDelay: `${index * 200 + 500}ms`,
-                            }}
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  ))}
+            <div ref={statsRef} className="grid grid-cols-3 gap-4">
+              {stats.map((stat, index) => (
+                <div
+                  key={index}
+                  className={`bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-1 ${
+                    statsVisible
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-10 opacity-0"
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <div className="text-secondary">{stat.icon}</div>
+                    <span className="text-2xl sm:text-3xl font-bold flex items-center justify-center">
+                      <CountUp
+                        end={Number.parseInt(
+                          stat.number.replace(/[^0-9]/g, "")
+                        )}
+                      />
+                      <span className="text-secondary text-xl">+</span>
+                    </span>
+                  </div>
+                  <p className="text-xs text-center text-white/70">
+                    {stat.label}
+                  </p>
                 </div>
-              </div>
+              ))}
             </div>
 
             {/* Animated skill tags - more compact */}
             <div className="mt-4 flex flex-wrap gap-1.5">
-              {["UI/UX Design", "Web Development", "Branding", "Digital Marketing", "Mobile Apps"].map((skill, idx) => (
+              {[
+                "UI/UX Design",
+                "Web Development",
+                "Branding",
+                "Digital Marketing",
+                "Mobile Apps",
+              ].map((skill, idx) => (
                 <div
                   key={idx}
                   className="bg-white/10 backdrop-blur-sm px-2 py-1 rounded-full text-xs border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
                   style={{
                     transitionDelay: `${idx * 100}ms`,
-                    animation: `fadeSlideIn 0.5s ease-out ${idx * 100 + 600}ms both`,
+                    animation: `fadeSlideIn 0.5s ease-out ${
+                      idx * 100 + 600
+                    }ms both`,
                   }}
                 >
                   {skill}
@@ -329,8 +349,10 @@ const Hero = () => {
         {/* Team Image Section - Positioned to be partially visible */}
         <div
           ref={videoSectionRef}
-          className={`relative w-full rounded-xl overflow-hidden shadow-2xl group transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} mt-4`}
-          style={{ transitionDelay: "600ms", }}
+          className={`relative w-full rounded-xl overflow-hidden shadow-2xl group transition-all duration-1000 transform ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          } mt-4`}
+          style={{ transitionDelay: "600ms" }}
         >
           {/* Decorative elements */}
           <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/30 rounded-full blur-xl z-0 animate-pulse"></div>
@@ -340,7 +362,7 @@ const Hero = () => {
           ></div>
 
           <img
-            src="https://images.unsplash.com/photo-1513258496099-48168024aec0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format"
+            src={hero}
             alt="Team collaboration"
             className="w-full h-full object-cover rounded-xl transition-transform duration-700 group-hover:scale-105"
           />
@@ -374,27 +396,9 @@ const Hero = () => {
           </div>
 
           {/* Scroll indicator */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce opacity-80">
+          <div className="absolute hidden sm:flex bottom-4 left-1/2 -translate-x-1/2 flex-col items-center animate-bounce opacity-80">
             <p className="text-white text-xs mb-1">Scroll to explore</p>
             <ChevronRight className="w-4 h-4 text-white transform rotate-90" />
-          </div>
-        </div>
-
-        {/* Client logos - only showing a hint */}
-        <div
-          className={`mt-6 transition-all duration-1000 transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} opacity-40 hover:opacity-100`}
-          style={{ transitionDelay: "900ms", height: "40px", overflow: "hidden" }}
-        >
-          <p className="text-white/70 text-xs font-medium mb-2 text-center">Trusted by industry leaders worldwide</p>
-          <div className="flex justify-center items-center gap-6">
-            {[1, 2, 3, 4, 5].map((_, index) => (
-              <div
-                key={index}
-                className="w-16 h-8 bg-white/10 backdrop-blur-sm rounded-md flex items-center justify-center hover:bg-white/20 transition-all duration-300"
-              >
-                <div className="w-10 h-4 bg-white/30 rounded"></div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -411,7 +415,7 @@ const Hero = () => {
             transform: translateY(0);
           }
         }
-        
+
         @keyframes float {
           0% {
             transform: translateY(0px);
@@ -423,7 +427,7 @@ const Hero = () => {
             transform: translateY(0px);
           }
         }
-        
+
         @keyframes spin-slow {
           from {
             transform: rotate(0deg);
@@ -432,7 +436,7 @@ const Hero = () => {
             transform: rotate(360deg);
           }
         }
-        
+
         @keyframes ripple {
           0% {
             transform: scale(1);
@@ -443,26 +447,24 @@ const Hero = () => {
             opacity: 0;
           }
         }
-        
+
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
-        
+
         .animate-spin-slow {
           animation: spin-slow 8s linear infinite;
         }
-        
+
         .animate-ripple {
           animation: ripple 2s linear infinite;
         }
       `}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
-
-
+export default Hero;
 
 // import React from "react";
 // import { Button } from "@/components/ui/button";
