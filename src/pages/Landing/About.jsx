@@ -149,7 +149,7 @@ export default function About() {
         ></div>
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-10 sm:space-y-16 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-10 px-5 sm:px-0 sm:space-y-16 relative z-10">
         {/* Header Section */}
         <motion.div
           ref={imageRef}
@@ -305,7 +305,7 @@ export default function About() {
 
           {/* Metrics Grid - Centered horizontally */}
           <motion.div className="flex" variants={containerVariants}>
-            <div className="grid grid-cols-2 gap-5 auto-rows-min w-full">
+            <div className="grid sm:grid-cols-2 gap-5 auto-rows-min w-full">
               {metrics.map((metric, index) => (
                 <motion.div
                   key={index}
