@@ -14,8 +14,8 @@ const contactInfoList = [
   },
   {
     icon: Phone,
-    label: "+880 1742-0****0",
-    href: "callto:+880 1742-0****0",
+    label: "+91 9876543210",
+    href: "callto:+91 9876543210",
   },
   { icon: HardDrive, label: "easyfrontend.com", href: "easyfrontend.com" },
 ];
