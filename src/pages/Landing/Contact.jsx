@@ -74,7 +74,7 @@ const ContactFormCard = () => (
       Contact Us
     </h2>
     <p className="text-lg mb-12">
-      We list your menu online, help you process orders.
+      We list your menu online, help you process your orders.
     </p>
 
     <ContactForm />
