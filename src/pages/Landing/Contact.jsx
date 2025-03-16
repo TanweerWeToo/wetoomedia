@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Mail, Phone, HardDrive } from "lucide-react";
 import classNames from "classnames";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const contactInfoList = [
   {
@@ -20,16 +23,38 @@ const contactInfoList = [
 const ContactForm = () => {
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      toast.error('Please fill all required fields correctly');
+      return;
     }
 
-    setValidated(true);
+    try {
+      const formData = {
+        name: form.elements[0].value,
+        email: form.elements[1].value,
+        message: form.elements[2].value,
+      };
+
+      const response = await toast.promise(
+        axios.post("http://wetoomedia.rf.gd/submit.php", formData),
+        {
+          pending: 'Sending message...',
+          success: 'Message sent successfully! 👌',
+          error: 'Failed to send message 🤯'
+        }
+      );
+      
+      setValidated(true);
+      form.reset();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -106,29 +131,43 @@ ContactInfo.propTypes = {
 
 const Contact = () => {
   return (
-    <section className="ezy__contact10 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-hidden">
-      <div className="container px-4">
-        <div className="grid grid-cols-12 py-6 gap-4">
-          <div className="col-span-12 lg:col-span-6 lg:col-start-7 sm:order-2 mb-4 lg:mb-0">
-            <div className="relative min-h-[300px] rounded-2xl sm:min-h-[150px] w-full sm:w-[50vw] h-full">
-              <img
-                src="https://cdn.easyfrontend.com/pictures/contact/contact_7.png"
-                alt="Contact background"
-                className="absolute inset-0 rounded-2xl w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute sm:relative top-1/2 left-1/2 -translate-x-[40%] sm:-translate-x-1/2 -translate-y-1/2 z-10">
-                <ContactInfo contactInfoList={contactInfoList} />
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+      <section className="ezy__contact10 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-hidden">
+        <div className="container px-4">
+          <div className="grid grid-cols-12 py-6 gap-4">
+            <div className="col-span-12 lg:col-span-6 lg:col-start-7 sm:order-2 mb-4 lg:mb-0">
+              <div className="relative min-h-[300px] rounded-2xl sm:min-h-[150px] w-full sm:w-[50vw] h-full">
+                <img
+                  src="https://cdn.easyfrontend.com/pictures/contact/contact_7.png"
+                  alt="Contact background"
+                  className="absolute inset-0 rounded-2xl w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute sm:relative top-1/2 left-1/2 -translate-x-[40%] sm:-translate-x-1/2 -translate-y-1/2 z-10">
+                  <ContactInfo contactInfoList={contactInfoList} />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col-span-12 lg:col-span-5">
-            <ContactFormCard />
+            <div className="col-span-12 lg:col-span-5">
+              <ContactFormCard />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
