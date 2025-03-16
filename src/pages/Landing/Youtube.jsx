@@ -63,7 +63,7 @@ const Stats = () => {
           subtitle="We Too Media is a media production company that specializes in creating high-quality media content for businesses and organizations."
           subtitleClassName="text-gray-300 xs:text-base text-sm md:text-lg"
         />
-        <div className="grid grid-cols-2 xs:gap-8 gap-1 md:grid-cols-4 md:gap-0 md:divide-x-2 md:divide-red-700">
+        <div className="grid grid-cols-2 xs:gap-8 gap-1 md:grid-cols-4 md:gap-0 md:divide-x-2 md:divide-secondary">
           {statsData.map((item, index) => (
             <StatItem key={index} data={item.data} title={item.title} />
           ))}
