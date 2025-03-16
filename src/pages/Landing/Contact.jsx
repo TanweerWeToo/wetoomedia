@@ -22,9 +22,11 @@ const contactInfoList = [
 
 const ContactForm = () => {
   const [validated, setValidated] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
     
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -42,11 +44,21 @@ const ContactForm = () => {
       };
 
       const response = await toast.promise(
-        axios.post("http://wetoomedia.rf.gd/submit.php", formData),
+        axios.post("http://wetoomedia.rf.gd/submit.php", formData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: false // Important for CORS
+        }),
         {
           pending: 'Sending message...',
           success: 'Message sent successfully! 👌',
-          error: 'Failed to send message 🤯'
+          error: {
+            render({data}) {
+              // When the promise reject, data will contain the error
+              return data?.message || 'Failed to send message 🤯';
+            }
+          }
         }
       );
       
@@ -54,11 +66,13 @@ const ContactForm = () => {
       form.reset();
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <form className="" noValidate validated={validated} onSubmit={handleSubmit}>
+    <form className="w-full" noValidate validated={validated} onSubmit={handleSubmit}>
       <div className="mb-4">
         <input
           type="text"
@@ -84,9 +98,10 @@ const ContactForm = () => {
       <div className="text-start">
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-opacity-90 text-white px-8 py-3 rounded mb-4"
+          disabled={isSubmitting}
+          className="bg-blue-600 hover:bg-opacity-90 text-white px-8 py-3 rounded mb-4 disabled:opacity-50"
         >
-          Submit
+          {isSubmitting ? 'Sending...' : 'Submit'}
         </button>
       </div>
     </form>
@@ -94,7 +109,7 @@ const ContactForm = () => {
 };
 
 const ContactFormCard = () => (
-  <div className="bg-white dark:bg-[#162231] rounded-2xl border-[5px] sm:border-[15px] dark:border-[#1C293A] border-[#F4F7FD] border- p-6 md:p-12">
+  <div className="bg-white dark:bg-[#162231] rounded-2xl border-[5px] sm:border-[15px] dark:border-[#1C293A] border-[#F4F7FD] border-solid ma p-6 md:p-12">
     <h2 className="text-2xl md:text-[45px] leading-none font-bold mb-4">
       Contact Us
     </h2>
@@ -146,9 +161,9 @@ const Contact = () => {
       />
       <section className="ezy__contact10 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-hidden">
         <div className="container px-4">
-          <div className="grid grid-cols-12 py-6 gap-4">
+          <div className="grid grid-cols-12 py-6 gap-4 sm:gap-14">
             <div className="col-span-12 lg:col-span-6 lg:col-start-7 sm:order-2 mb-4 lg:mb-0">
-              <div className="relative min-h-[300px] rounded-2xl sm:min-h-[150px] w-full sm:w-[50vw] h-full">
+              <div className="relative min-h-[300px] rounded-2xl sm:min-h-[500px] lg:min-h-[150px] mx-auto w-full sm:w-[50vw] h-full">
                 <img
                   src="https://cdn.easyfrontend.com/pictures/contact/contact_7.png"
                   alt="Contact background"
@@ -156,7 +171,7 @@ const Contact = () => {
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute sm:relative top-1/2 left-1/2 -translate-x-[40%] sm:-translate-x-1/2 -translate-y-1/2 z-10">
+                <div className="absolute sm:relative top-1/2 left-1/2 -translate-x-[37.5%] sm:-translate-x-1/2 -translate-y-1/2 z-10">
                   <ContactInfo contactInfoList={contactInfoList} />
                 </div>
               </div>
