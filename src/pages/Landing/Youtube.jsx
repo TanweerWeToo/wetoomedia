@@ -15,7 +15,7 @@ const StatItem = memo(({ data, title }) => (
     <div className="text-5xl font-bold text-white sm:text-6xl">
       <NumberTicker
         value={data}
-        className="xs:text-4xl text-2xl font-bold text-white sm:text-6xl"
+        className="xs:text-4xl text-3xl font-bold text-white sm:text-6xl"
       />
       <span className="ml-1 xs:text-4xl text-2xl font-bold text-white sm:text-6xl">
         +
