@@ -358,6 +358,70 @@ const Dummy = () => {
           </div>
         </div>
       </section>
+
+      <motion.div
+          ref={imageRef}
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
+          variants={imageVariants}
+          className="relative overflow-hidden rounded-xl shadow-lg group"
+          style={{
+            borderRadius: "1rem",
+            boxShadow: `0 10px 30px -5px rgba(42, 78, 110, 0.15), 0 4px 6px -2px rgba(42, 78, 110, 0.05)`,
+          }}
+        >
+          <motion.div
+            className="absolute inset-0 z-10"
+            style={{
+              background: `linear-gradient(to right, ${colors.primary}80 0%, transparent 20%, transparent 80%, ${colors.primary}80 100%)`,
+              mixBlendMode: "multiply",
+              opacity: 0.3,
+            }}
+          ></motion.div>
+
+          <motion.img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-EQhAqQAqWebitswLxfnGCPagoPNPLW.png"
+            alt="Financial planners collaborating"
+            className="w-full h-full object-cover"
+            style={{
+              y: imageY,
+              scale: imageScale,
+              transition: "transform 0.7s cubic-bezier(0.33, 1, 0.68, 1)",
+              filter: "saturate(1.1)",
+            }}
+          />
+
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(to top, ${colors.primary}90 0%, transparent 50%)`,
+              opacity: opacityOverlay,
+              mixBlendMode: "multiply",
+            }}
+          ></motion.div>
+
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            style={{ backgroundColor: `${colors.primary}20` }}
+          ></div>
+
+          {/* Image caption */}
+          <div
+            className="absolute bottom-0 left-0 right-0 p-6 text-white opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300"
+            style={{
+              background: `linear-gradient(to top, ${colors.primary} 0%, transparent 100%)`,
+              backdropFilter: "blur(4px)",
+            }}
+          >
+            <p className="text-sm font-medium">
+              Our team of expert financial planners
+            </p>
+            <div
+              className="h-1 w-20 mt-2 rounded-full"
+              style={{ backgroundColor: colors.accent }}
+            ></div>
+          </div>
+        </motion.div>
     </div>
   );
 };
