@@ -269,22 +269,24 @@ export default function About() {
               <div
                 className="inline-flex items-center px-5 py-3 rounded-full cursor-pointer transition-all duration-300"
                 style={{
-                  backgroundColor: "white",
+                  backgroundColor: colors.primary,
                   border: `1px solid ${colors.primary}30`,
-                  color: colors.primary,
+                  color: "white",
                   boxShadow:
                     "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = colors.primary;
                   e.currentTarget.style.color = "white";
+                  e.currentTarget.style.opacity = "0.7";
                   e.currentTarget.style.transform = "translateY(-2px)";
                   e.currentTarget.style.boxShadow =
                     "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "white";
-                  e.currentTarget.style.color = colors.primary;
+                  e.currentTarget.style.backgroundColor = colors.primary;
+                  e.currentTarget.style.color = "white";
+                  e.currentTarget.style.opacity = "1";
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.boxShadow =
                     "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
