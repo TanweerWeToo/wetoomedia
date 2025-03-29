@@ -44,7 +44,7 @@ const ContactForm = () => {
       };
 
       const response = await toast.promise(
-        axios.post("http://wetoomedia.rf.gd/submit.php", formData, {
+        axios.post("https://powderblue-ibis-363059.hostingersite.com/submit.php", formData, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -52,7 +52,7 @@ const ContactForm = () => {
         }),
         {
           pending: 'Sending message...',
-          success: 'Message sent successfully! 👌',
+          success: 'Form submitted successfully! 👌',
           error: {
             render({data}) {
               // When the promise reject, data will contain the error

@@ -27,7 +27,7 @@ const StatItem = memo(({ data, displayUnit, title }) => (
         +
       </span>
     </div>
-    <div className="mt-3 xs:text-sm text-xs font-medium text-gray-400 sm:text-xl">
+    <div className="mt-3 xs:text-sm text-xs font-medium text-center sm:text-start text-gray-400 sm:text-xl">
       {title}
     </div>
   </div>
