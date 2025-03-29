@@ -190,7 +190,7 @@ export default function About() {
         ></div>
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-10 px-5 sm:px-5 sm:space-y-16 z-10">
+      <div className="max-w-7xl mx-auto space-y-10 px-5 sm:px-5 sm:space-y-20 z-10">
         {/* Content Grid */}
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start z-10"
