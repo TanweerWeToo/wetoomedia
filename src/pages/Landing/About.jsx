@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Card } from "../../components/ui/card";
-import {  Users, GraduationCap, Handshake, BookOpen, Star } from "lucide-react";
+import { Users, GraduationCap, Handshake, BookOpen, Star } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "../../lib/utils";
 
@@ -17,7 +17,7 @@ const metrics = [
   {
     icon: <GraduationCap className="w-6 h-6" />,
     value: "6",
-    label: "Years of Digital Education", 
+    label: "Years of Digital Education",
     color: colors.primary,
   },
   {
@@ -29,7 +29,7 @@ const metrics = [
   },
   {
     icon: <Handshake className="w-6 h-6" />,
-    value: "3", 
+    value: "3",
     label: "Partner Universities",
     color: colors.primary,
   },
@@ -142,7 +142,7 @@ export default function About() {
 
   return (
     <div
-      className="w-full py-10 sm:py-20 overflow-hidden"
+      className="w-full py-10 sm:py-20"
       ref={sectionRef}
       style={{ backgroundColor: colors.background }}
     >
@@ -190,10 +190,10 @@ export default function About() {
         ></div>
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-10 px-5 sm:px-5 sm:space-y-16 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-10 px-5 sm:px-5 sm:space-y-16 z-10">
         {/* Content Grid */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start z-10"
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={containerVariants}
@@ -357,8 +357,11 @@ export default function About() {
           </div>
 
           {/* Metrics Grid - Centered horizontally */}
-          <motion.div className="flex sticky top-0" variants={containerVariants}>
-            <div className="grid sm:grid-cols-2 gap-5 auto-rows-min w-full">
+          <motion.div
+            className="flex sm:sticky top-20"
+            variants={containerVariants}
+          >
+            <div className="grid sm:grid-cols-2 gap-5 sticky top-0 auto-rows-min w-full">
               {metrics.map((metric, index) => (
                 <motion.div
                   key={index}
