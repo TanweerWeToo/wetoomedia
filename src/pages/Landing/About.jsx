@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Card } from "../../components/ui/card";
-import { Trophy, Users, ThumbsUp, ClipboardList, Calendar } from "lucide-react";
+import {  Users, GraduationCap, Handshake, BookOpen, Star } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "../../lib/utils";
 
@@ -15,33 +15,35 @@ const colors = {
 
 const metrics = [
   {
-    icon: <Calendar className="w-6 h-6" />,
-    value: "20",
-    label: "Year of Experience",
+    icon: <GraduationCap className="w-6 h-6" />,
+    value: "6",
+    label: "Years of Digital Education", 
     color: colors.primary,
-  },
-  {
-    icon: <ClipboardList className="w-6 h-6" />,
-    value: "50+",
-    label: "Successful Project",
-    color: colors.secondary,
   },
   {
     icon: <Users className="w-6 h-6" />,
-    value: "94",
-    label: "Trusted Employees",
-    color: colors.primary,
-  },
-  {
-    icon: <ThumbsUp className="w-6 h-6" />,
-    value: "96%",
-    label: "Positive Reviews",
+    value: "250",
+    suffix: "K",
+    label: "Students Mentored",
     color: colors.secondary,
   },
   {
-    icon: <Trophy className="w-6 h-6" />,
-    value: "20",
-    label: "Achieve Awards",
+    icon: <Handshake className="w-6 h-6" />,
+    value: "3", 
+    label: "Partner Universities",
+    color: colors.primary,
+  },
+  {
+    icon: <BookOpen className="w-6 h-6" />,
+    value: "100",
+    suffix: "%",
+    label: "Free Resources Access",
+    color: colors.secondary,
+  },
+  {
+    icon: <Star className="w-6 h-6" />,
+    value: "1",
+    label: "UPSC AIR 3 Success Story",
     color: colors.accent,
   },
 ];
@@ -228,41 +230,80 @@ export default function About() {
                 }
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Uncover the Universe of{" "}
-                <span style={{ color: colors.primary }}>
-                  Financial Planners
-                </span>
+                A Unique Platform For All The{" "}
+                <span style={{ color: colors.primary }}>Aspirant-Students</span>
               </motion.h1>
 
               <div
-                className="h-1 w-20 mt-4 rounded-full"
+                className="h-1 w-40 mt-4 rounded-full"
                 style={{ backgroundColor: colors.accent }}
               ></div>
             </motion.div>
 
             <motion.p
-              className="leading-relaxed text-lg"
+              className="leading-relaxed text-[17px]"
               style={{ color: colors.text }}
               variants={itemVariants}
             >
-              Financial planning is more than just managing money; it's about
-              creating a roadmap for your financial future. A financial planner
-              is a qualified professional who helps individuals and families
-              make informed decisions about their finances, from budgeting and
-              saving to investing and retirement planning.
+              <span className="font-medium" style={{ color: colors.secondary }}>
+                Wetoo Media
+              </span>{" "}
+              was born out of a deep-rooted passion for{" "}
+              <span className="font-medium" style={{ color: colors.secondary }}>
+                supporting underprivileged students
+              </span>{" "}
+              and marginalized communities. Our founder's journey began with
+              volunteer work alongside NGOs and local organizations, focusing on{" "}
+              <span className="font-medium" style={{ color: colors.secondary }}>
+                uplifting society through education.
+              </span>{" "}
+              Despite facing numerous challenges and a lack of initial support,
+              the vision to create change remained unwavering. Leveraging the
+              power of social media, Wetoo Media emerged as a platform to make a
+              tangible impact.{" "}
+              <span className="font-medium" style={{ color: colors.secondary }}>
+                Starting in Delhi,
+              </span>{" "}
+              we assisted students from slum areas in gaining admissions to
+              prestigious institutions like Kendriya Vidyalaya (KVS), Jamia
+              Millia Islamia, and Aligarh Muslim University (AMU) under the
+              Economically Weaker Section (EWS) quota. Beyond admissions, we
+              provided books, stationery, and financial aid to students in need,
+              reinforcing our commitment to making{" "}
+              <span className="font-medium" style={{ color: colors.secondary }}>
+                quality education accessible to all.
+              </span>
             </motion.p>
 
             <motion.p
-              className="leading-relaxed text-lg"
+              className="leading-relaxed text-[17px]"
               style={{ color: colors.text }}
               variants={itemVariants}
             >
-              One of the key benefits of working with a financial planner is
-              receiving personalized financial advice tailored to your unique
-              goals and circumstances. Whether you're planning for retirement,
-              saving for a major purchase, or managing debt, a financial planner
-              can develop a comprehensive strategy designed to help you achieve
-              your objectives.
+              Inspired by a transformative encounter with{" "}
+              <span className="font-medium" style={{ color: colors.secondary }}>
+                Junaid Ahmad,
+              </span>{" "}
+              who secured All India Rank 3 in the UPSC Civil Services
+              Examination (CSE) 2018, Wetoo Media expanded its focus to include{" "}
+              <span className="font-medium" style={{ color: colors.secondary }}>
+                civil services preparation.
+              </span>{" "}
+              Over the past five to six years, our channel,{" "}
+              <span className="font-medium" style={{ color: colors.secondary }}>
+                Wetoo Media - IAS
+              </span>
+              , has mentored over 250,000 students, particularly from
+              marginalized communities. We provide free coaching{" "}
+              <span className="font-medium" style={{ color: colors.secondary }}>
+                guidance, exam resources, and counseling
+              </span>{" "}
+              for UPSC aspirants, with a special emphasis on programs like Jamia
+              RCA. Looking ahead, we aim to extend our support to SSC, NEET,
+              Judiciary exams, and more, while collaborating with NGOs and
+              coaching institutes to offer free coaching through CSR
+              initiatives. Our mission is to empower students nationwide through
+              affordable, accessible, and impactful digital education.
             </motion.p>
 
             <motion.div variants={itemVariants} className="pt-4">
@@ -379,16 +420,26 @@ export default function About() {
 
                     <div className="relative z-10">
                       <div
-                        className="text-xl font-bold"
+                        className="text-xl font-bold flex items-baseline"
                         style={{ color: metric.color }}
                       >
                         {isVisible ? (
-                          <CountUpValue
-                            value={metric.value}
-                            isVisible={isVisible}
-                          />
+                          <>
+                            <CountUpValue
+                              value={metric.value}
+                              isVisible={isVisible}
+                            />
+                            {metric.suffix && (
+                              <div className="ml-0.5">{metric.suffix}</div>
+                            )}
+                          </>
                         ) : (
-                          metric.value
+                          <>
+                            {metric.value}
+                            {metric.suffix && (
+                              <div className="ml-0.5">{metric.suffix}</div>
+                            )}
+                          </>
                         )}
                       </div>
                       <div
@@ -521,8 +572,7 @@ export default function About() {
 // Separate component for count-up animation
 function CountUpValue({ value, isVisible }) {
   const [count, setCount] = useState(0);
-  const finalValue = Number.parseInt(value.replace(/\D/g, ""), 10) || 0;
-  const hasPlus = value.includes("+");
+  const finalValue = Number.parseInt(value, 10) || 0;
 
   useEffect(() => {
     if (!isVisible) return;
@@ -549,5 +599,5 @@ function CountUpValue({ value, isVisible }) {
     return () => clearInterval(counter);
   }, [finalValue, isVisible]);
 
-  return <>{hasPlus ? `${count}+` : count}</>;
+  return <>{count}</>;
 }

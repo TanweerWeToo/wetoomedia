@@ -7,8 +7,8 @@ import {
   CheckCircle,
   Star,
   Clock,
-  CheckSquare,
-  Users,
+  GraduationCap,
+  Handshake,
   ArrowUpRight,
   Sparkles,
 } from "lucide-react";
@@ -113,22 +113,22 @@ const Hero = () => {
   // Animated stats
   const stats = [
     {
-      number: "12",
-      label: "Years Experience",
+      number: "5",
+      label: "Years Guiding Dreams",
       delay: "0",
       icon: <Clock className="w-5 h-5 sm:w-6 sm:h-6" />,
     },
     {
-      number: "83K",
-      label: "Projects Completed",
+      number: "250",
+      label: "Students Empowering Futures",
       delay: "150",
-      icon: <CheckSquare className="w-5 h-5 sm:w-6 sm:h-6" />,
+      icon: <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6" />,
     },
     {
-      number: "4.2K",
-      label: "Clients Worldwide",
+      number: "100", 
+      label: "Partners Building Trust",
       delay: "300",
-      icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" />,
+      icon: <Handshake className="w-5 h-5 sm:w-6 sm:h-6" />,
     },
   ];
 
@@ -167,14 +167,14 @@ const Hero = () => {
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full mb-4 md:mb-6 border border-white/10 hover:border-white/20 transition-all duration-300 group">
               <div className="w-1.5 h-1.5 bg-secondary rounded-full animate-ping"></div>
               <p className="text-white/90 text-xs font-medium group-hover:text-white transition-colors">
-                Established since 2011
+                Taiyari Karo, Sarkari Bano!
               </p>
             </div>
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-4 md:mb-6">
-              We Are{" "}
+              WeToo Media{" "}
               <span className="text-secondary relative inline-block">
-                Creative
+                Empower Futures!
                 <span
                   className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary/30 rounded-full transition-all duration-1000"
                   style={{ width: isVisible ? "100%" : "0%" }}
@@ -183,7 +183,7 @@ const Hero = () => {
                   <Star className="w-full h-full fill-secondary hidden md:block animate-spin-slow" />
                 </span>
               </span>
-              <br className="hidden md:block" />
+              {/* <br className="hidden md:block" />
               <span className="relative">
                 {" "}
                 Digital Agency
@@ -194,14 +194,14 @@ const Hero = () => {
                     transitionDelay: "0.5s",
                   }}
                 ></span>
-              </span>
+              </span> */}
             </h1>
 
             {/* Sleeker buttons with reduced height and width */}
             <div className="flex flex-wrap gap-3 items-center">
               <Button className="relative overflow-hidden bg-gradient-to-br from-secondary via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full px-5 py-0 h-9 text-sm font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20">
                 <span className="relative z-10 flex items-center">
-                  Get Started
+                  Register Now
                   <ArrowUpRight className="ml-1.5 w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                 </span>
                 <span className="absolute inset-0 w-full h-full bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
@@ -280,14 +280,21 @@ const Hero = () => {
             }`}
             style={{ transitionDelay: "300ms" }}
           >
-            <p className="text-white/90 text-base md:text-lg leading-relaxed mb-6 max-w-xl">
-              We are a{" "}
+            <p className="text-white/90 text-base md:text-[17px] leading-relaxed mb-6 max-w-xl">
+              Our journey began with a passion for{" "}
               <span className="text-secondary font-medium">
-                creative agency
+                supporting underprivileged students
               </span>{" "}
-              with several services that focused on quality and innovations for
-              your business. We transform ideas into exceptional digital
-              experiences.
+              marginalized communities. Over the years, we have worked
+              tirelessly to provide{" "}
+              <span className="text-secondary font-medium">
+                guidance, resources, and support
+              </span>{" "}
+              to help students gain admission to prestigious institutions and
+              prepare for competitive exams like{" "}
+              <span className="text-secondary font-medium">
+                UPSC, SSC, NEET, and Judiciary examinations.
+              </span>
             </p>
 
             {/* Compact statistics section with reduced height */}
@@ -310,7 +317,7 @@ const Hero = () => {
                           stat.number.replace(/[^0-9]/g, "")
                         )}
                       />
-                      <span className="text-secondary text-xl">+</span>
+                      <span className="text-secondary text-2xl">+</span>
                     </span>
                   </div>
                   <p className="text-xs text-center text-white/70">
@@ -323,15 +330,16 @@ const Hero = () => {
             {/* Animated skill tags - more compact */}
             <div className="mt-4 flex flex-wrap gap-1.5">
               {[
-                "UI/UX Design",
-                "Web Development",
-                "Branding",
-                "Digital Marketing",
-                "Mobile Apps",
+                "UPSC",
+                "PCS",
+                "UPPSC",
+                "BPSC",
+                "JUDICIARY",
+                "MORE"
               ].map((skill, idx) => (
                 <div
                   key={idx}
-                  className="bg-white/10 backdrop-blur-sm px-2 py-1 rounded-full text-xs border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
+                  className="bg-white/10 backdrop-blur-sm px-2 sm:px-5 lg:px-6 xl:px-[30.5px] py-1 rounded-full text-xs border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
                   style={{
                     transitionDelay: `${idx * 100}ms`,
                     animation: `fadeSlideIn 0.5s ease-out ${
