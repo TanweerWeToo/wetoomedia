@@ -24,7 +24,7 @@ const Heading = memo(
 
         {subtitle && (
           <WordFadeIn
-            className={`mx-auto max-w-screen-md xs:text-base text-sm text-center sm:text-lg md:text-lg lg:text-xl font-normal sm:font-semibold ${subtitleClassName}`}
+            className={`mx-auto max-w-screen-md xs:text-base text-sm text-center sm:text-lg md:text-lg font-normal sm:font-semibold ${subtitleClassName}`}
             words={subtitle}
             delay={0.05}
           />

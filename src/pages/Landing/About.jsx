@@ -357,7 +357,7 @@ export default function About() {
           </div>
 
           {/* Metrics Grid - Centered horizontally */}
-          <motion.div className="flex" variants={containerVariants}>
+          <motion.div className="flex sticky top-0" variants={containerVariants}>
             <div className="grid sm:grid-cols-2 gap-5 auto-rows-min w-full">
               {metrics.map((metric, index) => (
                 <motion.div

@@ -2,12 +2,13 @@ import React, { memo, useEffect, useState } from "react";
 import Heading from "../../components/Heading2";
 import WordPullUp from "../../components/ui/word-pull-up2";
 import NumberTicker from "../../components/ui/number-ticker";
+import youtube from "../../assets/Landing/wetooyt.jpeg";
 
 const statsData = [
-  { data: "1000+", title: "Subscribers" },
-  { data: "1000+", title: "Views" },
-  { data: "1000+", title: "Likes" },
-  { data: "1000+", title: "Comments" },
+  { data: "2.61 Lakh+", title: "Subscribers" },
+  { data: "4.03 Crore+", title: "Total Views" },
+  { data: "610+", title: "Educational Videos" },
+  { data: "2 Million+", title: "Highest Single Video Views" },
 ];
 
 const StatItem = memo(({ data, title }) => (
@@ -35,18 +36,17 @@ const Stats = () => {
 
   useEffect(() => {
     const img = new Image();
-    img.src =
-      "https://media.istockphoto.com/id/528198067/photo/asolo-ias.jpg?s=2048x2048&w=is&k=20&c=tSz8aqvucjSeYBcsbJOP76fC7-zZBP1bMPXNq8f2ARI=";
+    img.src = youtube;
     img.onload = () => {
       setImageLoaded(true);
     };
   }, []);
 
   return (
-    <section className="relative px-0 py-10 lg:py-28 md:py-12 sm:px-0">
+    <section className="relative min-h-screen px-0 py-10 lg:py-20 md:py-12 sm:px-0">
       {imageLoaded && (
         <img
-          src="https://media.istockphoto.com/id/528198067/photo/asolo-ias.jpg?s=2048x2048&w=is&k=20&c=tSz8aqvucjSeYBcsbJOP76fC7-zZBP1bMPXNq8f2ARI="
+          src={youtube}
           alt="stats"
           className="absolute top-0 left-0 object-cover w-full h-full -z-10 blur-sm"
           loading="lazy"
@@ -57,10 +57,10 @@ const Stats = () => {
       <div className="relative z-30 max-w-screen-xl px-4 mx-auto md:px-8">
         <WordPullUp
           className="mb-8 xs:text-4xl text-3xl font-bold text-center text-white md:text-6xl sm:font-bold md:font-extrabold sm:text-5xl lg:text-6xl"
-          words="WE TOO MEDIA"
+          words="WETOO MEDIA - IAS"
         />
         <Heading
-          subtitle="We Too Media is a media production company that specializes in creating high-quality media content for businesses and organizations."
+          subtitle="Your trusted digital mentor for UPSC, SSC & competitive exam success - empowering aspirants through free guidance, resources, and inspiration."
           subtitleClassName="text-gray-300 xs:text-base text-sm md:text-lg"
         />
         <div className="grid grid-cols-2 xs:gap-8 gap-1 md:grid-cols-4 md:gap-0 md:divide-x-2 md:divide-secondary">
