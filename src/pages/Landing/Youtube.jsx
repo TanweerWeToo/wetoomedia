@@ -5,20 +5,25 @@ import NumberTicker from "../../components/ui/number-ticker";
 import youtube from "../../assets/Landing/wetooyt.jpeg";
 
 const statsData = [
-  { data: "2.61 Lakh+", title: "Subscribers" },
-  { data: "4.03 Crore+", title: "Total Views" },
-  { data: "610+", title: "Educational Videos" },
-  { data: "2 Million+", title: "Highest Single Video Views" },
+  { data: 2.61, displayUnit: "L", title: "Subscribers" },
+  { data: 4.03, displayUnit: "Cr", title: "Total Views" },
+  { data: 610, displayUnit: "", title: "Educational Videos" },
+  { data: 2, displayUnit: "M", title: "Highest Single Video Views" },
 ];
 
-const StatItem = memo(({ data, title }) => (
+const StatItem = memo(({ data, displayUnit, title }) => (
   <div className="flex flex-col items-center p-4">
     <div className="text-5xl font-bold text-white sm:text-6xl">
       <NumberTicker
         value={data}
-        className="xs:text-4xl text-3xl font-bold text-white sm:text-6xl"
+        className="xs:text-3xl text-2xl font-bold text-white sm:text-5xl"
       />
-      <span className="ml-1 xs:text-4xl text-2xl font-bold text-white sm:text-6xl">
+      {displayUnit && (
+        <span className="ml-1 xs:text-3xl text-2xl font-bold text-white sm:text-5xl">
+          {displayUnit}
+        </span>
+      )}
+      <span className="ml-1 xs:text-3xl text-2xl font-bold text-white sm:text-5xl">
         +
       </span>
     </div>
@@ -43,7 +48,7 @@ const Stats = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen px-0 py-10 lg:py-20 md:py-12 sm:px-0">
+    <section className="relative sm:min-h-screen px-0 py-16 lg:py-20 sm:px-0">
       {imageLoaded && (
         <img
           src={youtube}
@@ -65,7 +70,7 @@ const Stats = () => {
         />
         <div className="grid grid-cols-2 xs:gap-8 gap-1 md:grid-cols-4 md:gap-0 md:divide-x-2 md:divide-secondary">
           {statsData.map((item, index) => (
-            <StatItem key={index} data={item.data} title={item.title} />
+            <StatItem key={index} data={item.data} displayUnit={item.displayUnit} title={item.title} />
           ))}
         </div>
       </div>
