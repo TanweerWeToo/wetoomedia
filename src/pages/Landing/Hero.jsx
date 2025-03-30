@@ -199,7 +199,7 @@ const Hero = () => {
 
             {/* Sleeker buttons with reduced height and width */}
             <div className="flex flex-wrap gap-3 items-center">
-              <Button className="relative overflow-hidden bg-gradient-to-br from-secondary via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full px-5 py-0 h-9 text-sm font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20">
+              <Button className="relative overflow-hidden bg-gradient-to-br from-accent via-accent to-accent/80 hover:from-accent hover:via-accent/90 hover:to-accent/70 text-white rounded-full px-5 py-0 h-9 text-sm font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20">
                 <span className="relative z-10 flex items-center">
                   Register Now
                   <ArrowUpRight className="ml-1.5 w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
