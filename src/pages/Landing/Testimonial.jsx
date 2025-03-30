@@ -6,7 +6,7 @@ const reviews = [
   {
     name: "Aman",
     username: "Aman, RCA Selected 2024",
-    body: "Selected. Thank you so much to @Tanweer Ahmad Sir for all your help. Also thanks to all my friends who shared their transcripts ",
+    body: "Selected! Thank you so much to @Tanweer Ahmad Sir for all your help. Also thanks to all my friends who shared their transcripts ",
     img: "https://avatar.vercel.sh/jack",
     rating: 5,
   },
@@ -20,7 +20,7 @@ const reviews = [
   {
     name: "Rozy Parveen",
     username: "Rozy Parveen, RCA Selected 2024",
-    body: "Selected 🤩... Thanks @Tanweer Ahmad sir.",
+    body: "Selected! 🤩... Thanks @Tanweer Ahmad sir.",
     img: "https://avatar.vercel.sh/john",
     rating: 5,
   },
@@ -39,11 +39,84 @@ const reviews = [
     rating: 4,
   },
   {
-    name: "Kritika ",
-    username: "Kritika",
-    body: "I would really like to thank WeToo for providing guidance and resource during preparation. This was the mostly relied on for almost everything",
+    name: "Ruksar",
+    username: "Ruksar, RCA Selected 2024",
+    body: "Selected! Thank You Sir, your guidance and fellow candidate’s transcripts ere of great help. Thank you🌸",
+    img: "https://avatar.vercel.sh/james",
+    rating: 4,
+  },
+  {
+    name: "Kritika",
+    username: "Kritika, RCA Selected 2024",
+    body: "Thank you so much @Tanweer Ahmad @Wetoo Media. It's all because of your help.",
     img: "https://avatar.vercel.sh/jenny",
     rating: 4,
+  },
+  {
+    name: "Saquib",
+    username: "Saquib, RCA Selected 2024 ",
+    body: "Thank You very much, Tanweer sir and Wetoo Media, for the 'RCA Interview Guidance Program'. It helped me a lot and gave me a roadmap for the practice, which aided me get on the list.",
+    img: "https://avatar.vercel.sh/jenny",
+    rating: 5,
+  },
+  {
+    name: "Dawood",
+    username: "Dawood, RCA Selected 2024",
+    body: "Alhamdulillah selected! Thanks for sharing insightful informations @Tanweer Ahmad sir",
+    img: "https://avatar.vercel.sh/jenny",
+    rating: 5,
+  },
+  {
+    name: "Dr. A. R. Rajah",
+    username: "Dr. A. R. Rajah, RCA",
+    body: "First time while checking I used find and couldn’t see my number, now it is there 😂 Thanks to @Tanweer Ahmad for the guidance and also ppl who put up transcripts😇 Got through both HSC and Jamia😇",
+    img: "https://avatar.vercel.sh/jenny",
+    rating: 5,
+  },
+//   {
+//     name: "Annu",
+//     username: "Annu, RCA Selected 2024",
+//     body: `I was a part of WeToo Media JMI-RCA interview group. I express my heartfelt gratitude towards Tanweer Sir and his whole team. They played a great role in my selection.  
+
+// The discussions on Google Meet were beneficial for understanding interview procedure.  
+
+// A WhatsApp group was made for us to go through previous and this year’s interview transcripts.  
+
+// Having somebody to guide and help us in this journey added confidence.  
+
+// Useful and insightful videos about JMI RCA helped me to get motivated for the entrance exam.  
+
+// Sending best wishes from my side for building a community of caring and helpful mentors.`,
+//     img: "https://avatar.vercel.sh/jenny",
+//     rating: 5,
+//   },
+  {
+    name: "MD Tauseef",
+    username: "MD Tauseef",
+    body: "My name is MD Tausif. I am preparing for UPSC CSE. Previously I used to be confused regarding admission RCAs. But now, I would like to thanks TANWEER SIR and his platform WE TOO MEDIA IAS for continuously guiding me. The interview guidance program of Sir helped me to secure a seat in JAMIA RCA (2024-25). ",
+    img: "https://avatar.vercel.sh/jenny",
+    rating: 5,
+  },
+  {
+    name: "Unknown",
+    username: "Unknown",
+    body: "Thanks a ton @Tanweer Ahmad Sir for this platform and guidance at every stage. Immense gratitude towards @Ghulam Jilani @Dr A R Rajah RCA Written Qualified 2023 Imran sir for interview related guidance.",
+    img: "https://avatar.vercel.sh/jenny",
+    rating: 5,
+  },
+  {
+    name: "Unknown",
+    username: "Unknown",
+    body: "Thank you so much sir for your all efforts 😊😊 A big thank you for Tanweer sir 😊.",
+    img: "https://avatar.vercel.sh/jenny",
+    rating: 5,
+  },
+  {
+    name: "Unknown",
+    username: "Unknown",
+    body: "Thank you @Tanweer Ahmad, @Dr A R Rajah Rca Written Qualified 2023 bhai and everyone who have been through this journey.. Got through! Congratulations to everyone who have been selected and to those who couldn't don't give up. Life doesn't stop here. Keep hustling. ",
+    img: "https://avatar.vercel.sh/jenny",
+    rating: 5,
   },
 ];
 
