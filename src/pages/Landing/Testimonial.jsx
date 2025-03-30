@@ -4,9 +4,9 @@ import { Star, Quote } from "lucide-react";
 
 const reviews = [
   {
-    name: "Jack",
-    username: "@jack",
-    body: "I've never seen anything like this before. It's amazing. I love it.",
+    name: "Aman",
+    username: "Aman RCA Selected 2024",
+    body: "Selected. Thank you so much to @Tanweer Ahmad Sir for all your help. Also thanks to all my friends who shared their transcripts ",
     img: "https://avatar.vercel.sh/jack",
     rating: 5,
   },
@@ -54,7 +54,7 @@ const ReviewCard = ({ img, name, username, body, rating }) => {
   return (
     <figure
       className={cn(
-        "relative h-full w-64 bg-[#2a4f6f0d] cursor-pointer overflow-hidden rounded-xl border p-5",
+        "relative h-min w-64 bg-[#2a4f6f0d] cursor-pointer overflow-hidden rounded-xl border p-5",
         // light styles
         "border-secondary/30 bg-[#2a4f6f0d] hover:bg-[#2a4f6f0d]",
         // dark styles

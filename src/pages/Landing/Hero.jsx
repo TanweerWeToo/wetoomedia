@@ -230,16 +230,16 @@ const Hero = () => {
               >
                 {[
                   {
-                    text: "Transformed our digital presence completely",
-                    author: "John D., CEO",
+                    text: "WeToo Media's guidance was a game-changer—helped me crack RCA with confidence.",
+                    author: "Tauheed Siddiqui, RCA Selected",
                   },
                   {
-                    text: "Innovative solutions that drive real results",
-                    author: "Sarah M., Marketing",
+                    text: "Immense gratitude to WeToo Media for providing the right direction and resources!",
+                    author: "Rozi Parveen, RCA Selected",
                   },
                   {
-                    text: "The most creative team we've worked with",
-                    author: "Alex T., Product",
+                    text: "Thanks to WeToo Media’s interview guidance, I secured my dream selection!",
+                    author: "Dawood Shaikh, RCA Selected",
                   },
                 ].map((testimonial, idx) => (
                   <div key={idx} className="flex items-center gap-2 p-3 h-12">
