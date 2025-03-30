@@ -339,7 +339,7 @@ const Hero = () => {
               ].map((skill, idx) => (
                 <div
                   key={idx}
-                  className="bg-white/10 bg-gradient-to-tr from-primary to-secondary backdrop-blur-sm px-2 sm:px-5 lg:px-6 xl:px-[30.5px] py-1 rounded-full text-xs border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
+                  className="bg-secondary/80  backdrop-blur-sm px-2 sm:px-5 lg:px-6 xl:px-[30.5px] py-1 rounded-full text-xs border border-secondary/80 hover:bg-secondary/90 hover:border-secondary transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
                   style={{
                     transitionDelay: `${idx * 100}ms`,
                     animation: `fadeSlideIn 0.5s ease-out ${
