@@ -330,16 +330,15 @@ const Hero = () => {
             {/* Animated skill tags - more compact */}
             <div className="mt-4 flex flex-wrap gap-1.5">
               {[
-                "UPSC",
-                "PCS",
-                "UPPSC",
+                "RCA",
                 "BPSC",
-                "JUDICIARY",
-                "MORE"
+                "UPSC/PCS",
+                "METRIMONIAL",
+                // "MORE"
               ].map((skill, idx) => (
-                <div
+                <Button
                   key={idx}
-                  className="bg-secondary/80  backdrop-blur-sm px-2 sm:px-5 lg:px-6 xl:px-[30.5px] py-1 rounded-full text-xs border border-secondary/80 hover:bg-secondary/90 hover:border-secondary transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
+                  className="relative overflow-hidden bg-gradient-to-br from-secondary px-5 sm:px-10 via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full py-0 h-9 text-sm font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20"
                   style={{
                     transitionDelay: `${idx * 100}ms`,
                     animation: `fadeSlideIn 0.5s ease-out ${
@@ -348,7 +347,7 @@ const Hero = () => {
                   }}
                 >
                   {skill}
-                </div>
+                </Button>
               ))}
             </div>
           </div>
