@@ -3,6 +3,11 @@ import { Card } from "../../components/ui/card";
 import { Users, GraduationCap, Handshake, BookOpen, Star } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "../../lib/utils";
+import about1 from "../../assets/Landing/about1.webp";
+import about2 from "../../assets/Landing/about2.webp";
+import about3 from "../../assets/Landing/about3.webp";
+import about4 from "../../assets/Landing/about4.webp";
+import about5 from "../../assets/Landing/about5.webp";
 
 // Custom color palette
 const colors = {
@@ -511,48 +516,50 @@ export default function About() {
         <section className="">
           <div className="gallery max-w-7xl mx-auto">
             <div className="flex flex-col mb-10">
-              <div className="grid md:grid-cols-12 gap-8 lg:mb-11 mb-7">
-                <div className="md:col-span-4 md:h-[404px] h-[277px] w-full rounded-3xl">
+              <div className="grid grid-cols-2 md:grid-cols-12 gap-8 lg:mb-11 mb-7">
+                <div className="md:col-span-4 md:h-[404px] aspect-square w-full rounded-3xl">
                   <img
-                    src="https://pagedone.io/asset/uploads/1713942989.png"
+                    src={about1}
                     alt="Gallery image"
                     className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto lg:col-span-4 md:col-span-6 w-full h-full"
-                    onClick={() =>
-                      openLightbox(
-                        "https://pagedone.io/asset/uploads/1713942989.png"
-                      )
-                    }
+                    onClick={() => openLightbox(about1)}
                   />
                 </div>
-                <div className="md:col-span-8 md:h-[404px] h-[277px] w-full rounded-3xl">
+                <div className="md:col-span-8 md:h-[404px] aspect-square w-full rounded-3xl">
                   <img
-                    src="https://pagedone.io/asset/uploads/1713943004.png"
+                    src={about2}
                     alt="Gallery image"
                     className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto lg:col-span-8 md:col-span-6 w-full h-full"
-                    onClick={() =>
-                      openLightbox(
-                        "https://pagedone.io/asset/uploads/1713943004.png"
-                      )
-                    }
+                    onClick={() => openLightbox(about2)}
                   />
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
-                {["1713943024", "1713943039", "1713943054"].map((id) => (
-                  <div key={id} className="h-[277px] w-full rounded-3xl">
-                    <img
-                      src={`https://pagedone.io/asset/uploads/${id}.png`}
-                      alt="Gallery image"
-                      className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
-                      onClick={() =>
-                        openLightbox(
-                          `https://pagedone.io/asset/uploads/${id}.png`
-                        )
-                      }
-                    />
-                  </div>
-                ))}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div className="aspect-square w-full rounded-3xl">
+                  <img
+                    src={about3}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about3)}
+                  />
+                </div>
+                <div className="aspect-square w-full rounded-3xl">
+                  <img
+                    src={about4}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about4)}
+                  />
+                </div>
+                <div className="aspect-square w-full rounded-3xl">
+                  <img
+                    src={about5}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about5)}
+                  />
+                </div>
               </div>
             </div>
           </div>
