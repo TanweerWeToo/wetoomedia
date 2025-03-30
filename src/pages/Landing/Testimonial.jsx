@@ -5,45 +5,45 @@ import { Star, Quote } from "lucide-react";
 const reviews = [
   {
     name: "Aman",
-    username: "Aman RCA Selected 2024",
+    username: "Aman, RCA Selected 2024",
     body: "Selected. Thank you so much to @Tanweer Ahmad Sir for all your help. Also thanks to all my friends who shared their transcripts ",
     img: "https://avatar.vercel.sh/jack",
     rating: 5,
   },
   {
-    name: "Jill",
-    username: "@jill",
-    body: "I don't know what to say. I'm speechless. This is amazing.",
+    name: "Akansha Biswas",
+    username: "Akansha Biswas, RCA Selected 2024 ",
+    body: "Selected! Thank you to all for sharing your interview transcripts and @Wetoo Media for sharing previous transcripts because I did get questions from those! Very grateful!",
     img: "https://avatar.vercel.sh/jill",
     rating: 4,
   },
   {
-    name: "John",
-    username: "@john",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "Rozy Parveen",
+    username: "Rozy Parveen, RCA Selected 2024",
+    body: "Selected 🤩... Thanks @Tanweer Ahmad sir.",
     img: "https://avatar.vercel.sh/john",
-    rating: 3,
+    rating: 5,
   },
   {
-    name: "Jane",
-    username: "@jane",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "Naved",
+    username: "Naved, RCA Selected 2024 ",
+    body: "Selected!! Thank you sir, for interview guidance.",
     img: "https://avatar.vercel.sh/jane",
-    rating: 2,
+    rating: 4,
   },
   {
-    name: "Jenny",
-    username: "@jenny",
-    body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
-    rating: 1,
-  },
-  {
-    name: "James",
-    username: "@james",
-    body: "I'm at a loss for words. This is amazing. I love it.",
+    name: "ANA Musharraf",
+    username: "ANA Musharraf, RCA selected 2024 ",
+    body: "WeToo’s RCA interview guidance program was really helpful in giving the direction in which the interview prep should be done, specially the transcript were really useful. Thank you Tanweer sir for the initiative.",
     img: "https://avatar.vercel.sh/james",
-    rating: 1,
+    rating: 4,
+  },
+  {
+    name: "Kritika ",
+    username: "Kritika",
+    body: "I would really like to thank WeToo for providing guidance and resource during preparation. This was the mostly relied on for almost everything",
+    img: "https://avatar.vercel.sh/jenny",
+    rating: 4,
   },
 ];
 
@@ -54,7 +54,7 @@ const ReviewCard = ({ img, name, username, body, rating }) => {
   return (
     <figure
       className={cn(
-        "relative h-min w-64 bg-[#2a4f6f0d] cursor-pointer overflow-hidden rounded-xl border p-5",
+        "relative h-min w-96 bg-[#2a4f6f0d] cursor-pointer overflow-hidden rounded-xl border p-5",
         // light styles
         "border-secondary/30 bg-[#2a4f6f0d] hover:bg-[#2a4f6f0d]",
         // dark styles
