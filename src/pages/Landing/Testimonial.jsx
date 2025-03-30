@@ -73,23 +73,23 @@ const reviews = [
     img: "https://avatar.vercel.sh/jenny",
     rating: 5,
   },
-//   {
-//     name: "Annu",
-//     username: "Annu, RCA Selected 2024",
-//     body: `I was a part of WeToo Media JMI-RCA interview group. I express my heartfelt gratitude towards Tanweer Sir and his whole team. They played a great role in my selection.  
+  //   {
+  //     name: "Annu",
+  //     username: "Annu, RCA Selected 2024",
+  //     body: `I was a part of WeToo Media JMI-RCA interview group. I express my heartfelt gratitude towards Tanweer Sir and his whole team. They played a great role in my selection.
 
-// The discussions on Google Meet were beneficial for understanding interview procedure.  
+  // The discussions on Google Meet were beneficial for understanding interview procedure.
 
-// A WhatsApp group was made for us to go through previous and this year’s interview transcripts.  
+  // A WhatsApp group was made for us to go through previous and this year’s interview transcripts.
 
-// Having somebody to guide and help us in this journey added confidence.  
+  // Having somebody to guide and help us in this journey added confidence.
 
-// Useful and insightful videos about JMI RCA helped me to get motivated for the entrance exam.  
+  // Useful and insightful videos about JMI RCA helped me to get motivated for the entrance exam.
 
-// Sending best wishes from my side for building a community of caring and helpful mentors.`,
-//     img: "https://avatar.vercel.sh/jenny",
-//     rating: 5,
-//   },
+  // Sending best wishes from my side for building a community of caring and helpful mentors.`,
+  //     img: "https://avatar.vercel.sh/jenny",
+  //     rating: 5,
+  //   },
   {
     name: "MD Tauseef",
     username: "MD Tauseef",
@@ -167,29 +167,31 @@ const ReviewCard = ({ img, name, username, body, rating }) => {
 
 export default function Testimonial() {
   return (
-    <div className="relative flex w-full max-w-7xl pb-16 mx-auto flex-col items-center justify-center overflow-hidden">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-3">
-          What Our Students Say
-        </h2>
-        <div className="w-24 h-1 bg-accent mx-auto rounded-full mb-4"></div>
-        <p className="text-text/80 max-w-2xl mx-auto">
-          Don't just take our word for it. Here's what people are saying about
-          our products and services.
-        </p>
+    <section className="px-5 md:px-8 py-10 md:py-16 relative overflow-hidden">
+      <div className="relative flex w-full max-w-7xl mx-auto flex-col items-center justify-center overflow-hidden">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-3">
+            What Our Students Say
+          </h2>
+          <div className="w-24 h-1 bg-accent mx-auto rounded-full mb-4"></div>
+          <p className="text-text/80 max-w-2xl mx-auto">
+            Don't just take our word for it. Here's what people are saying about
+            our products and services.
+          </p>
+        </div>
+        <Marquee pauseOnHover className="[--duration:20s] [--gap:2rem]">
+          {firstRow.map((review) => (
+            <ReviewCard key={review.username} {...review} />
+          ))}
+        </Marquee>
+        <Marquee reverse pauseOnHover className="[--duration:20s] [--gap:2rem]">
+          {secondRow.map((review) => (
+            <ReviewCard key={review.username} {...review} />
+          ))}
+        </Marquee>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
       </div>
-      <Marquee pauseOnHover className="[--duration:20s] [--gap:2rem]">
-        {firstRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
-        ))}
-      </Marquee>
-      <Marquee reverse pauseOnHover className="[--duration:20s] [--gap:2rem]">
-        {secondRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
-        ))}
-      </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
-    </div>
+    </section>
   );
 }

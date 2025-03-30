@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import Heading from "../../components/Heading2";
 import WordPullUp from "../../components/ui/word-pull-up2";
 import NumberTicker from "../../components/ui/number-ticker";
-import youtube from "../../assets/Landing/wetooyt.jpeg";
+import youtube from "../../assets/Landing/wetooyt.webp";
 
 const statsData = [
   { data: 2.61, displayUnit: "L", title: "Subscribers" },
@@ -60,17 +60,20 @@ const Stats = () => {
       )}
       <div className="absolute inset-0 z-20 bg-black opacity-70" />
       <div className="relative z-30 max-w-screen-xl px-4 mx-auto md:px-8">
-        <WordPullUp
-          className="mb-8 xs:text-4xl text-3xl font-bold text-center text-white md:text-6xl sm:font-bold md:font-extrabold sm:text-5xl lg:text-6xl"
-          words="WETOO MEDIA - IAS"
-        />
         <Heading
+          title="WETOO MEDIA - IAS"
+          titleClassName="mb-8 xs:text-4xl text-3xl font-bold text-center text-white md:text-6xl sm:font-bold md:font-extrabold sm:text-5xl lg:text-6xl"
           subtitle="Your trusted digital mentor for UPSC, SSC & competitive exam success - empowering aspirants through free guidance, resources, and inspiration."
           subtitleClassName="text-gray-300 xs:text-base text-sm md:text-lg"
         />
         <div className="grid grid-cols-2 xs:gap-8 gap-1 md:grid-cols-4 md:gap-0 md:divide-x-2 md:divide-secondary">
           {statsData.map((item, index) => (
-            <StatItem key={index} data={item.data} displayUnit={item.displayUnit} title={item.title} />
+            <StatItem
+              key={index}
+              data={item.data}
+              displayUnit={item.displayUnit}
+              title={item.title}
+            />
           ))}
         </div>
       </div>
