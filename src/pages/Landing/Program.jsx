@@ -1,10 +1,11 @@
-"use client";
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight } from "lucide-react";
+import rca from "@/assets/Landing/Jamia logo.png";
+import upsc from "@/assets/Landing/UPSC logo.webp";
+import bpsc from "@/assets/Landing/BPSC logo img.jpg";
 
 export default function Program() {
   const [activeTab, setActiveTab] = React.useState("all");
@@ -12,58 +13,33 @@ export default function Program() {
   const courses = [
     {
       id: 1,
-      title: "New Batch 2",
-      level: "XII (NEET)",
-      startDate: "16-03-2025",
-      year: "2026",
-      fee: "15000",
-      image:
-        "https://www.thelakshyadhanbad.com/assets/New%20batch-CP9H6CWk.jpg",
-      category: "neet",
+      title: "New Batch",
+      level: "RCA Preparation",
+      startDate: "01-04-2025",
+      year: "2025",
+      fee: "—",
+      image: rca,
+      category: "rca",
     },
     {
       id: 2,
-      title: "Foundation Batch 2",
-      level: "X (Foundation)",
-      startDate: "16-03-2025",
-      year: "2026",
-      fee: "9000",
-      image:
-        "https://www.thelakshyadhanbad.com/assets/Foundation%20batch-BHAeRLTY.jpg",
-      category: "foundation",
+      title: "New Batch",
+      level: "UPSC/PSC Preparation",
+      startDate: "—",
+      year: "2025",
+      fee: "—",
+      image: upsc,
+      category: "upsc",
     },
     {
       id: 3,
-      title: "Foundation Batch 1",
-      level: "IX (Foundation)",
-      startDate: "16-03-2025",
-      year: "2026",
-      fee: "9000",
-      image:
-        "https://www.thelakshyadhanbad.com/assets/Foundation%20batch-BHAeRLTY.jpg",
-      category: "foundation",
-    },
-    {
-      id: 4,
-      title: "New Batch 1",
-      level: "XII (JEE)",
-      startDate: "09-03-2025",
-      year: "2026",
-      fee: "15000",
-      image:
-        "https://www.thelakshyadhanbad.com/assets/New%20batch-CP9H6CWk.jpg",
-      category: "jee",
-    },
-    {
-      id: 5,
-      title: "Udaan 3.0",
-      level: "Dropper (NEET)",
-      startDate: "16-03-2025",
-      year: "2026",
-      fee: "15000",
-      image:
-        "https://www.thelakshyadhanbad.com/assets/Target%20batch-D4DKsKgn.jpg",
-      category: "neet",
+      title: "New Batch",
+      level: "BPSC Preparation",
+      startDate: "—",
+      year: "2025",
+      fee: "—",
+      image: bpsc,
+      category: "bpsc",
     },
   ];
 
@@ -108,22 +84,22 @@ export default function Program() {
           >
             <TabsList className="grid grid-cols-4 bg-white/20">
               <TabsTrigger
-                value="jee"
+                value="rca"
                 className="data-[state=active]:bg-white data-[state=active]:text-[#2A4E6E] text-white"
               >
-                JEE
+                RCA
               </TabsTrigger>
               <TabsTrigger
-                value="neet"
+                value="upsc"
                 className="data-[state=active]:bg-white data-[state=active]:text-[#2A4E6E] text-white"
               >
-                NEET
+                UPSC/PSC
               </TabsTrigger>
               <TabsTrigger
-                value="foundation"
+                value="bpsc"
                 className="data-[state=active]:bg-white data-[state=active]:text-[#2A4E6E] text-white"
               >
-                FOUNDATION
+                BPSC
               </TabsTrigger>
               <TabsTrigger
                 value="all"
