@@ -8,6 +8,7 @@ import about2 from "../../assets/Landing/about2.webp";
 import about3 from "../../assets/Landing/about3.webp";
 import about4 from "../../assets/Landing/about4.webp";
 import about5 from "../../assets/Landing/about5.webp";
+import about6 from "../../assets/Landing/about5+md.webp";
 
 // Custom color palette
 const colors = {
@@ -527,10 +528,16 @@ export default function About() {
                 </div>
                 <div className="md:col-span-8 md:h-[404px] aspect-square w-full rounded-3xl">
                   <img
-                    src={about2}
+                    src={about3}
                     alt="Gallery image"
-                    className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto lg:col-span-8 md:col-span-6 w-full h-full"
-                    onClick={() => openLightbox(about2)}
+                    className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto lg:col-span-8 md:col-span-6 w-full h-full block md:hidden"
+                    onClick={() => openLightbox(about3)}
+                  />
+                  <img 
+                    src={about6}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto lg:col-span-8 md:col-span-6 w-full h-full md:block hidden"
+                    onClick={() => openLightbox(about6)}
                   />
                 </div>
               </div>
@@ -538,10 +545,10 @@ export default function About() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
                 <div className="aspect-square w-full rounded-3xl">
                   <img
-                    src={about3}
+                    src={about2}
                     alt="Gallery image"
                     className="gallery-image object-cover rounded-3xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
-                    onClick={() => openLightbox(about3)}
+                    onClick={() => openLightbox(about2)}
                   />
                 </div>
                 <div className="aspect-square w-full rounded-3xl">

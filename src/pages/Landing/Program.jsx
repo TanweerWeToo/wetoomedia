@@ -41,6 +41,36 @@ export default function Program() {
       image: bpsc,
       category: "bpsc",
     },
+    // {
+    //   id: 4,
+    //   title: "New Batch",
+    //   level: "RCA Preparation",
+    //   startDate: "01-04-2025",
+    //   year: "2025",
+    //   fee: "—",
+    //   image: rca,
+    //   category: "rca",
+    // },
+    // {
+    //   id: 5,
+    //   title: "New Batch",
+    //   level: "UPSC/PSC Preparation",
+    //   startDate: "—",
+    //   year: "2025",
+    //   fee: "—",
+    //   image: upsc,
+    //   category: "upsc",
+    // },
+    // {
+    //   id: 6,
+    //   title: "New Batch",
+    //   level: "BPSC Preparation",
+    //   startDate: "—",
+    //   year: "2025",
+    //   fee: "—",
+    //   image: bpsc,
+    //   category: "bpsc",
+    // },
   ];
 
   const filteredCourses =
