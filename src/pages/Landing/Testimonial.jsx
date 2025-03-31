@@ -169,7 +169,7 @@ export default function Testimonial() {
   return (
     <section className="px-5 md:px-8 py-10 md:py-16 relative overflow-hidden">
       <div className="relative flex w-full max-w-7xl mx-auto flex-col items-center justify-center overflow-hidden">
-        <div className="text-center mb-12">
+        {/* <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-3">
             What Our Students Say
           </h2>
@@ -178,7 +178,7 @@ export default function Testimonial() {
             Don't just take our word for it. Here's what people are saying about
             our products and services.
           </p>
-        </div>
+        </div> */}
         <Marquee pauseOnHover className="[--duration:20s] [--gap:2rem]">
           {firstRow.map((review) => (
             <ReviewCard key={review.username} {...review} />

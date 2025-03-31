@@ -17,7 +17,7 @@ export default function Program() {
       level: "RCA Preparation",
       startDate: "01-04-2025",
       year: "2025",
-      fee: "—",
+      fee: "350/-",
       image: rca,
       category: "rca",
     },
