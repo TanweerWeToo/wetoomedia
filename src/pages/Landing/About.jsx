@@ -148,6 +148,7 @@ export default function About() {
 
   return (
     <div
+      id="about"
       className="w-full py-10 sm:py-20"
       ref={sectionRef}
       style={{ backgroundColor: colors.background }}

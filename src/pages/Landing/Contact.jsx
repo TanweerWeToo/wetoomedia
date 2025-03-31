@@ -159,7 +159,7 @@ const Contact = () => {
         pauseOnHover
         theme="colored"
       />
-      <section className="ezy__contact10 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-hidden">
+      <section id="contact" className="ezy__contact10 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-hidden">
         <div className="container px-4">
           <div className="grid grid-cols-12 py-6 gap-4 sm:gap-14">
             <div className="col-span-12 lg:col-span-6 lg:col-start-7 sm:order-2 mb-4 lg:mb-0">

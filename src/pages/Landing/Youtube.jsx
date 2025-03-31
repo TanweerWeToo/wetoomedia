@@ -48,7 +48,7 @@ const Stats = () => {
   }, []);
 
   return (
-    <section className="relative sm:min-h-screen px-0 py-16 lg:py-20 sm:px-0">
+    <section id="youtube" className="relative sm:min-h-screen px-0 py-16 lg:py-20 sm:px-0">
       {imageLoaded && (
         <img
           src={youtube}

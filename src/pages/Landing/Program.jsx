@@ -80,6 +80,7 @@ export default function Program() {
 
   return (
     <section
+      id="programs"
       className="bg-primary text-white px-5 md:px-8 py-10 md:py-16 relative overflow-hidden"
       style={{ backgroundColor: "#2A4E6E" }}
     >

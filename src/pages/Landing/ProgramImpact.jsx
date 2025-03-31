@@ -105,7 +105,7 @@ const ProgramImpact = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden bg-gradient-to-b from-background to-background/90">
+    <section id="testimonials" className="py-20 relative overflow-hidden bg-gradient-to-b from-background to-background/90">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
