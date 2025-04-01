@@ -3,7 +3,7 @@ import logo from "@/assets/wetoo-logo.jpg";
 import Drawer from "./Drawer";
 import { useEffect, useState } from "react";
 
-export function Header() {
+export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,7 +36,7 @@ export function Header() {
           <a href="/" className="flex items-center overflow-hidden">
             <img
               src={logo}
-              alt="Col Brown Cambridge School"
+              alt="Wetoo Logo"
               className="p-2 rounded-full h-[70px]"
             />
             <span className="text-base font-bold">We Too Media</span>
