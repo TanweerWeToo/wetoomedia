@@ -3,7 +3,7 @@ import logo from "@/assets/wetoo-logo.jpg";
 import Drawer from "./Drawer";
 import { useEffect, useState } from "react";
 
-export default function Header() {
+export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
