@@ -23,24 +23,24 @@ export default function Footer() {
 
   const footerSections = [
     {
-      label: "Useful Links",
+      label: "Blog/News",
       items: [
-        { name: "About Us", path: "/about/vision-mission" },
-        { name: "Rankings & Awards", path: "/about/accreditations-rankings" },
-        { name: "Accreditations", path: "/accreditations" },
-        { name: "Events", path: "/students-life/life-at-ssim" },
-        { name: "Media", path: "/students-life/news-announcements" },
-        { name: "Blog", path: "/blog" },
-        { name: "Careers", path: "/careers" },
-        {
-          name: "AICTE Feedback",
-          path: "https://www.aicte-india.org/feedback/",
-        },
+        { name: "UPSC Preparation Strategy", path: "/about/vision-mission" },
+        { name: "Syllabus & Study Techniques", path: "/about/accreditations-rankings" },
+        { name: "Current Affairs & Government Schemes", path: "/accreditations" },
+        { name: "Success & Interview Guidance", path: "/students-life/life-at-ssim" },
+        // { name: "Media", path: "/students-life/news-announcements" },
+        // { name: "Blog", path: "/blog" },
+        // { name: "Careers", path: "/careers" },
+        // {
+        //   name: "AICTE Feedback",
+        //   path: "https://www.aicte-india.org/feedback/",
+        // },
         // { name: "AICTE Approvals", path: aicteapprovals },
       ],
     },
     {
-      label: "Programs Offered",
+      label: "Upcomings",
       items: [
         { name: "PGDM", path: "/programs/pgdm" },
         { name: "PGDM - BIFS", path: "/programs/pgdm-bifs" },
@@ -50,14 +50,14 @@ export default function Footer() {
       ],
     },
     {
-      label: "Committees",
+      label: "Matrimonial",
       items: [
         { name: "Grievance Redressal Mechanism", path: "/grievance" },
         { name: "Internal Complaints Committee", path: "/complaints" },
       ],
     },
     {
-      label: "S P Sampathys Siva Sivani Educational Society",
+      label: "Contact Us",
       items: [
         { name: "Siva Sivani Institute of Management", path: "/" },
         { name: "Siva Sivani Degree College", path: "https://ssdc.ac.in" },
