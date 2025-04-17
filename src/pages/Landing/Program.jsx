@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import rca from "@/assets/Landing/Jamia logo.png";
 import upsc from "@/assets/Landing/UPSC logo.webp";
 import bpsc from "@/assets/Landing/BPSC logo img.jpg";
-
+import RegistrationForm from "@/components/registration-form";
 export default function Program() {
   const [activeTab, setActiveTab] = React.useState("all");
 
@@ -175,9 +175,10 @@ export default function Program() {
                       </p>
                     </div>
                   </div>
-                  <Button className="mt-4 bg-[#CC5500] hover:bg-[#CC5500]/80 text-white w-full">
+                  <RegistrationForm courseName={course.title} courseColor={course.category} />
+                  {/* <Button className="mt-4 bg-[#CC5500] hover:bg-[#CC5500]/80 text-white w-full">
                     Enroll <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
             </Card>

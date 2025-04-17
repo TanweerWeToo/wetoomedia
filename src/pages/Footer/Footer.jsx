@@ -42,30 +42,29 @@ export default function Footer() {
     {
       label: "Upcomings",
       items: [
-        { name: "PGDM", path: "/programs/pgdm" },
-        { name: "PGDM - BIFS", path: "/programs/pgdm-bifs" },
-        { name: "PGDM - BA", path: "/programs/pgdm-ba" },
-        { name: "FPM", path: "/programs/fpm" },
-        { name: "EFPM", path: "/programs/efpm" },
+        { name: "Upcoming Event 1", path: "/events/event1" },
+        { name: "Upcoming Event 2", path: "/events/event2" },
+        { name: "Upcoming Event 3", path: "/events/event3" },
+        { name: "Upcoming Event 4", path: "/events/event4" },
+        { name: "Upcoming Event 5", path: "/events/event5" },
       ],
     },
     {
       label: "Matrimonial",
       items: [
-        { name: "Grievance Redressal Mechanism", path: "/grievance" },
-        { name: "Internal Complaints Committee", path: "/complaints" },
+        { name: "Create Profile", path: "/matrimonial/create" },
+        { name: "Browse Profiles", path: "/matrimonial/browse" },
+        { name: "Success Stories", path: "/matrimonial/success" },
+        { name: "Premium Membership", path: "/matrimonial/premium" },
       ],
     },
     {
       label: "Contact Us",
       items: [
-        { name: "Siva Sivani Institute of Management", path: "/" },
-        { name: "Siva Sivani Degree College", path: "https://ssdc.ac.in" },
-        { name: "Siva Sivani Junior College", path: "https://ssjc.ac.in" },
-        {
-          name: "Siva Sivani High School",
-          path: "https://www.spsschool.ac.in",
-        },
+        { name: "Head Office - Delhi", path: "/contact/delhi" },
+        // { name: "Mumbai Office", path: "/contact/mumbai" },
+        // { name: "Bangalore Office", path: "/contact/bangalore" },
+        { name: "Support Center", path: "/contact/support" },
       ],
     },
   ];
@@ -92,7 +91,7 @@ export default function Footer() {
         ></div>
       </div>
 
-      <div className="container relative mx-auto">
+      <div className="sm:container relative mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12">
           {/* Logo and Social Section */}
           <div className="lg:col-span-3 space-y-8">
@@ -115,31 +114,31 @@ export default function Footer() {
                     icon: Facebook,
                     bgColor: "bg-blue-600",
                     label: "Facebook",
-                    href: "https://www.facebook.com/SivaSivaniInstituteofManagementHyderabad/",
+                    href: "#",
                   },
                   {
                     icon: Instagram,
                     bgColor: "bg-pink-600",
                     label: "Instagram",
-                    href: "https://www.instagram.com/ssim_b_school/?hl=en",
+                    href: "#",
                   },
                   {
                     icon: Twitter,
                     bgColor: "bg-sky-500",
                     label: "Twitter",
-                    href: "https://x.com/SSIMHyderabad",
+                    href: "#",
                   },
                   {
                     icon: Linkedin,
                     bgColor: "bg-blue-700",
                     label: "LinkedIn",
-                    href: "https://www.linkedin.com/school/siva-sivani-institute-of-management/",
+                    href: "#",
                   },
                   {
                     icon: Youtube,
                     bgColor: "bg-red-600",
                     label: "YouTube",
-                    href: "https://www.youtube.com/@sivasivaniinstituteofmanag3545",
+                    href: "#",
                   },
                 ].map((social, index) => (
                   <a
