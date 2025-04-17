@@ -175,7 +175,10 @@ export default function Program() {
                       </p>
                     </div>
                   </div>
-                  <RegistrationForm courseName={course.title} courseColor={course.category} />
+                  <RegistrationForm 
+                    courseName={course.level} 
+                    // courseColor={course.category === "rca" ? "blue" : course.category === "upsc" ? "emerald" : "orange"} 
+                  />
                   {/* <Button className="mt-4 bg-[#CC5500] hover:bg-[#CC5500]/80 text-white w-full">
                     Enroll <ArrowRight className="ml-2 h-4 w-4" />
                   </Button> */}
