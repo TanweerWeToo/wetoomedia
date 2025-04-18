@@ -125,7 +125,7 @@ const Hero = () => {
       icon: <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6" />,
     },
     {
-      number: "100", 
+      number: "100",
       label: "Partners Building Trust",
       delay: "300",
       icon: <Handshake className="w-5 h-5 sm:w-6 sm:h-6" />,
@@ -133,7 +133,10 @@ const Hero = () => {
   ];
 
   return (
-    <section id="hero" className="bg-primary text-white px-5 md:px-8 pb-10 pt-[112px] md:pb-20 md:pt-[136px] relative overflow-hidden">
+    <section
+      id="hero"
+      className="bg-primary text-white px-5 md:px-8 pb-10 pt-[112px] md:pb-20 md:pt-[136px] relative overflow-hidden"
+    >
       {/* Animated background elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
       <div
@@ -199,27 +202,31 @@ const Hero = () => {
 
             {/* Sleeker buttons with reduced height and width */}
             <div className="flex flex-wrap gap-3 items-center">
-              <Button className="relative overflow-hidden bg-gradient-to-br from-accent via-accent to-accent/80 hover:from-accent hover:via-accent/90 hover:to-accent/70 text-white rounded-full px-5 py-0 h-9 text-sm font-medium group transition-all duration-300 shadow-md shadow-accent/20 hover:shadow-accent/30 hover:shadow-lg border border-accent/20">
-                <span className="relative z-10 flex items-center">
-                  Register Now
-                  <ArrowUpRight className="ml-1.5 w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-                </span>
-                <span className="absolute inset-0 w-full h-full bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </Button>
-
-              <Button
-                variant="outline"
-                className="relative overflow-hidden bg-white/5 hover:bg-white/10 text-white border-white/20 rounded-full px-5 py-0 h-9 text-sm font-medium backdrop-blur-sm transition-all duration-300 hover:border-white/40 group"
-              >
-                <span className="relative z-10 flex items-center">
-                  <Sparkles className="mr-1.5 w-3 h-3 text-secondary/80 group-hover:text-secondary transition-colors duration-300" />
-                  Our Services
-                  <span className="relative ml-1.5 w-3.5 h-3.5 overflow-hidden">
-                    <ArrowRight className="absolute transform translate-x-0 group-hover:translate-x-8 transition-transform duration-300" />
-                    <ArrowRight className="absolute transform -translate-x-8 group-hover:translate-x-0 transition-transform duration-300" />
+              <a href="#programs">
+                <Button className="relative overflow-hidden bg-gradient-to-br from-accent via-accent to-accent/80 hover:from-accent hover:via-accent/90 hover:to-accent/70 text-white rounded-full px-5 py-0 h-9 text-sm font-medium group transition-all duration-300 shadow-md shadow-accent/20 hover:shadow-accent/30 hover:shadow-lg border border-accent/20">
+                  <span className="relative z-10 flex items-center">
+                    Register Now
+                    <ArrowUpRight className="ml-1.5 w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                   </span>
-                </span>
-              </Button>
+                  <span className="absolute inset-0 w-full h-full bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </Button>
+              </a>
+
+              <a href="#programs">
+                <Button
+                  variant="outline"
+                  className="relative overflow-hidden bg-white/5 hover:bg-white/10 text-white border-white/20 rounded-full px-5 py-0 h-9 text-sm font-medium backdrop-blur-sm transition-all duration-300 hover:border-white/40 group"
+                >
+                  <span className="relative z-10 flex items-center">
+                    <Sparkles className="mr-1.5 w-3 h-3 text-secondary/80 group-hover:text-secondary transition-colors duration-300" />
+                    Our Services
+                    <span className="relative ml-1.5 w-3.5 h-3.5 overflow-hidden">
+                      <ArrowRight className="absolute transform translate-x-0 group-hover:translate-x-8 transition-transform duration-300" />
+                      <ArrowRight className="absolute transform -translate-x-8 group-hover:translate-x-0 transition-transform duration-300" />
+                    </span>
+                  </span>
+                </Button>
+              </a>
             </div>
 
             {/* Animated testimonial highlights - more compact */}
@@ -336,18 +343,20 @@ const Hero = () => {
                 "METRIMONIAL",
                 // "MORE"
               ].map((skill, idx) => (
-                <Button
-                  key={idx}
-                  className="relative overflow-hidden bg-gradient-to-br from-secondary px-5 sm:px-8 lg:px-10 xl:px-[45px] via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full py-0 h-9 text-sm font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20"
-                  style={{
-                    transitionDelay: `${idx * 100}ms`,
-                    animation: `fadeSlideIn 0.5s ease-out ${
-                      idx * 100 + 600
-                    }ms both`,
-                  }}
-                >
-                  {skill}
-                </Button>
+                <a href="#programs">
+                  <Button
+                    key={idx}
+                    className="relative overflow-hidden bg-gradient-to-br from-secondary px-5 sm:px-8 lg:px-10 xl:px-[45px] via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full py-0 h-9 text-sm font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20"
+                    style={{
+                      transitionDelay: `${idx * 100}ms`,
+                      animation: `fadeSlideIn 0.5s ease-out ${
+                        idx * 100 + 600
+                      }ms both`,
+                    }}
+                  >
+                    {skill}
+                  </Button>
+                </a>
               ))}
             </div>
           </div>
