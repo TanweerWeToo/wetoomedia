@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Mail, Phone, HardDrive } from "lucide-react";
 import classNames from "classnames";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const contactInfoList = [
   {
@@ -27,12 +27,12 @@ const ContactForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
-    
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      toast.error('Please fill all required fields correctly');
+      toast.error("Please fill all required fields correctly");
       return;
     }
 
@@ -44,24 +44,28 @@ const ContactForm = () => {
       };
 
       const response = await toast.promise(
-        axios.post("https://powderblue-ibis-363059.hostingersite.com/submit.php", formData, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          withCredentials: false // Important for CORS
-        }),
-        {
-          pending: 'Sending message...',
-          success: 'Form submitted successfully! 👌',
-          error: {
-            render({data}) {
-              // When the promise reject, data will contain the error
-              return data?.message || 'Failed to send message 🤯';
-            }
+        axios.post(
+          "https://powderblue-ibis-363059.hostingersite.com/submit.php",
+          formData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: false, // Important for CORS
           }
+        ),
+        {
+          pending: "Sending message...",
+          success: "Form submitted successfully! 👌",
+          error: {
+            render({ data }) {
+              // When the promise reject, data will contain the error
+              return data?.message || "Failed to send message 🤯";
+            },
+          },
         }
       );
-      
+
       setValidated(true);
       form.reset();
     } catch (error) {
@@ -72,12 +76,18 @@ const ContactForm = () => {
   };
 
   return (
-    <form className="w-full" noValidate validated={validated} onSubmit={handleSubmit}>
+    <form
+      className="w-full"
+      noValidate
+      validated={validated}
+      onSubmit={handleSubmit}
+    >
       <div className="mb-4">
         <input
           type="text"
           className="min-h-[48px] leading-[48px] bg-[#F2F6FD] dark:bg-[#2A384C] border border-transparent rounded-xl focus:outline-none focus:border focus:border-[#86b7fe] w-full px-5"
           placeholder="Enter Name"
+          required
         />
       </div>
       <div className="mb-4">
@@ -85,6 +95,7 @@ const ContactForm = () => {
           type="email"
           className="min-h-[48px] leading-[48px] bg-[#F2F6FD] dark:bg-[#2A384C] border border-transparent rounded-xl focus:outline-none focus:border focus:border-[#86b7fe] w-full px-5"
           placeholder="Enter Email"
+          required
         />
       </div>
       <div className="mb-4">
@@ -93,6 +104,7 @@ const ContactForm = () => {
           className="min-h-[48px] leading-[48px] bg-[#F2F6FD] dark:bg-[#2A384C] border border-transparent rounded-xl focus:outline-none focus:border focus:border-[#86b7fe] w-full px-5"
           placeholder="Enter Message"
           rows="4"
+          required
         ></textarea>
       </div>
       <div className="text-start">
@@ -101,7 +113,7 @@ const ContactForm = () => {
           disabled={isSubmitting}
           className="bg-blue-600 hover:bg-opacity-90 text-white px-8 py-3 rounded mb-4 disabled:opacity-50"
         >
-          {isSubmitting ? 'Sending...' : 'Submit'}
+          {isSubmitting ? "Sending..." : "Submit"}
         </button>
       </div>
     </form>
@@ -147,7 +159,7 @@ ContactInfo.propTypes = {
 const Contact = () => {
   return (
     <>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -158,8 +170,11 @@ const Contact = () => {
         draggable
         pauseOnHover
         theme="colored"
-      />
-      <section id="contact" className="ezy__contact10 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-hidden">
+      /> */}
+      <section
+        id="contact"
+        className="ezy__contact10 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-hidden"
+      >
         <div className="container px-4">
           <div className="grid grid-cols-12 py-6 gap-4 sm:gap-14">
             <div className="col-span-12 lg:col-span-6 lg:col-start-7 sm:order-2 mb-4 lg:mb-0">

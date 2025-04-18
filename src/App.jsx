@@ -3,6 +3,8 @@ import LandingPage from "./pages/Landing/LandingPage";
 import Navbar from "./pages/Navbar/Navbar";
 import Footer from "./pages/Footer/Footer";
 import { ArrowUp } from "lucide-react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -41,6 +43,20 @@ const App = () => {
       >
         <ArrowUp className="w-5 h-5" />
       </button>
+      
+      {/* Add ToastContainer once at the root level */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 };

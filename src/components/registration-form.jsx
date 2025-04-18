@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,6 +20,19 @@ import {
 } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ArrowRight } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+
+// Add this helper function to format the date
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 export default function RegistrationFormDemo({ courseName }) {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -35,14 +46,104 @@ export default function RegistrationFormDemo({ courseName }) {
     gradYear: "",
     optionalPaper: "",
     comments: "",
+    courseName: courseName,
+    paid: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Add validation state
+  const [errors, setErrors] = useState({
+    fullName: "",
+    fatherName: "",
+    email: "",
+    mobile: "",
+    dob: "",
+    state: "",
+    degree: "",
+    subject: "",
+    gradYear: "",
+    optionalPaper: "",
+  });
+
+  // Add validation functions
+  const validateField = (name, value) => {
+    let error = "";
+    
+    switch (name) {
+      case "fullName":
+        if (value.length < 3) {
+          error = "Name must be at least 3 characters long";
+        } else if (!/^[a-zA-Z\s]*$/.test(value)) {
+          error = "Name should only contain letters and spaces";
+        }
+        break;
+
+      case "fatherName":
+        if (value.length < 3) {
+          error = "Father's name must be at least 3 characters long";
+        } else if (!/^[a-zA-Z\s]*$/.test(value)) {
+          error = "Name should only contain letters and spaces";
+        }
+        break;
+
+      case "email":
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Please enter a valid email address";
+        }
+        break;
+
+      case "mobile":
+        if (!/^[6-9]\d{9}$/.test(value)) {
+          error = "Please enter a valid number (should start with 6-9 and be 10 digits)";
+        }
+        break;
+
+      case "dob":
+        const birthDate = new Date(value);
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+        if (age < 18 || age > 60) {
+          error = "Age must be between 18 and 60 years";
+        }
+        break;
+
+      case "degree":
+        if (value.length < 2) {
+          error = "Please enter a valid degree";
+        }
+        break;
+
+      case "subject":
+        if (value.length < 2) {
+          error = "Please enter a valid subject";
+        }
+        break;
+
+      case "optionalPaper":
+        if (value.length < 2) {
+          error = "Please enter a valid optional paper";
+        }
+        break;
+
+      default:
+        break;
+    }
+    return error;
+  };
+
+  // Update handleInputChange to include validation
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [id]: value,
+    }));
+
+    // Validate field and update errors
+    const error = validateField(id, value);
+    setErrors((prev) => ({
+      ...prev,
+      [id]: error,
     }));
   };
 
@@ -51,18 +152,69 @@ export default function RegistrationFormDemo({ courseName }) {
       ...prev,
       [id]: value,
     }));
+
+    const error = validateField(id, value);
+    setErrors((prev) => ({
+      ...prev,
+      [id]: error,
+    }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    
+    // Validate all fields
+    let newErrors = {};
+    let hasErrors = false;
+    
+    Object.keys(formData).forEach(key => {
+      if (key !== "comments" && key !== "courseName" && key !== "paid") {
+        const error = validateField(key, formData[key]);
+        if (error) {
+          hasErrors = true;
+          newErrors[key] = error;
+        }
+      }
+    });
+
+    if (hasErrors) {
+      setErrors(newErrors);
+      toast.error("Please fill all required fields correctly");
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Form submitted:", formData);
-      setIsSubmitting(false);
+    try {
+      // Create a new object with formatted date
+      const formattedData = {
+        ...formData,
+        dob: formatDate(formData.dob) // Format the date before sending
+      };
 
-      // Reset form
+      const response = await toast.promise(
+        axios.post(
+          "https://powderblue-ibis-363059.hostingersite.com/register.php",
+          formattedData, // Send the formatted data
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        ),
+        {
+          pending: "Registering your account...",
+          success: "Registration successful!",
+          error: {
+            render({ data }) {
+              const errorMessage = data?.response?.data?.message || "Registration failed. Please try again";
+              return errorMessage;
+            },
+          },
+        }
+      );
+
+      // Reset form on success
       setFormData({
         fullName: "",
         fatherName: "",
@@ -75,8 +227,16 @@ export default function RegistrationFormDemo({ courseName }) {
         gradYear: "",
         optionalPaper: "",
         comments: "",
+        courseName: courseName,
+        paid: false,
       });
-    }, 1500);
+      setErrors({});
+
+    } catch (error) {
+      console.error("Registration error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const indianStates = [
@@ -133,6 +293,19 @@ export default function RegistrationFormDemo({ courseName }) {
 
   return (
     <>
+      {/* <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      /> */}
+      
       <Dialog>
         <DialogTrigger asChild>
           <Button className="w-full !gap-5 bg-accent hover:bg-accent/80 text-white">
@@ -162,8 +335,13 @@ export default function RegistrationFormDemo({ courseName }) {
                   onChange={handleInputChange}
                   required
                   placeholder="Enter your full name"
-                  className="focus-visible:ring-emerald-500"
+                  className={`focus-visible:ring-emerald-500 ${
+                    errors.fullName ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.fullName && (
+                  <p className="text-xs text-red-500">{errors.fullName}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -176,8 +354,13 @@ export default function RegistrationFormDemo({ courseName }) {
                   onChange={handleInputChange}
                   required
                   placeholder="Enter your father's name"
-                  className="focus-visible:ring-emerald-500"
+                  className={`focus-visible:ring-emerald-500 ${
+                    errors.fatherName ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.fatherName && (
+                  <p className="text-xs text-red-500">{errors.fatherName}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -191,8 +374,13 @@ export default function RegistrationFormDemo({ courseName }) {
                   onChange={handleInputChange}
                   required
                   placeholder="example@email.com"
-                  className="focus-visible:ring-emerald-500"
+                  className={`focus-visible:ring-emerald-500 ${
+                    errors.email ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.email && (
+                  <p className="text-xs text-red-500">{errors.email}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -205,10 +393,15 @@ export default function RegistrationFormDemo({ courseName }) {
                   value={formData.mobile}
                   onChange={handleInputChange}
                   required
-                  placeholder="10-digit mobile number"
-                  pattern="[0-9]{10}"
-                  className="focus-visible:ring-emerald-500"
+                  placeholder="Valid mobile number (10 digits)"
+                  pattern="[6-9][0-9]{9}"
+                  className={`focus-visible:ring-emerald-500 ${
+                    errors.mobile ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.mobile && (
+                  <p className="text-xs text-red-500">{errors.mobile}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -223,11 +416,16 @@ export default function RegistrationFormDemo({ courseName }) {
                   required
                   min={minDateString}
                   max={today}
-                  className="focus-visible:ring-emerald-500"
+                  className={`focus-visible:ring-emerald-500 ${
+                    errors.dob ? "border-red-500" : ""
+                  }`}
                 />
                 <p className="text-xs text-slate-500">
                   You must be between 18-60 years old
                 </p>
+                {errors.dob && (
+                  <p className="text-xs text-red-500">{errors.dob}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -255,6 +453,9 @@ export default function RegistrationFormDemo({ courseName }) {
                     ))}
                   </SelectContent>
                 </Select>
+                {errors.state && (
+                  <p className="text-xs text-red-500">{errors.state}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -268,8 +469,13 @@ export default function RegistrationFormDemo({ courseName }) {
                   onChange={handleInputChange}
                   required
                   placeholder="e.g., B.Tech, B.A., M.Sc."
-                  className="focus-visible:ring-emerald-500"
+                  className={`focus-visible:ring-emerald-500 ${
+                    errors.degree ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.degree && (
+                  <p className="text-xs text-red-500">{errors.degree}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -282,8 +488,13 @@ export default function RegistrationFormDemo({ courseName }) {
                   onChange={handleInputChange}
                   required
                   placeholder="e.g., Computer Science, Economics"
-                  className="focus-visible:ring-emerald-500"
+                  className={`focus-visible:ring-emerald-500 ${
+                    errors.subject ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.subject && (
+                  <p className="text-xs text-red-500">{errors.subject}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -312,6 +523,9 @@ export default function RegistrationFormDemo({ courseName }) {
                     ))}
                   </SelectContent>
                 </Select>
+                {errors.gradYear && (
+                  <p className="text-xs text-red-500">{errors.gradYear}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -325,8 +539,13 @@ export default function RegistrationFormDemo({ courseName }) {
                   onChange={handleInputChange}
                   required
                   placeholder="e.g., Public Administration, Geography"
-                  className="focus-visible:ring-emerald-500"
+                  className={`focus-visible:ring-emerald-500 ${
+                    errors.optionalPaper ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.optionalPaper && (
+                  <p className="text-xs text-red-500">{errors.optionalPaper}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -338,8 +557,13 @@ export default function RegistrationFormDemo({ courseName }) {
                   value={formData.comments}
                   onChange={handleInputChange}
                   placeholder="Any additional information you'd like to share"
-                  className="min-h-[80px] focus-visible:ring-emerald-500"
+                  className={`min-h-[80px] focus-visible:ring-emerald-500 ${
+                    errors.comments ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.comments && (
+                  <p className="text-xs text-red-500">{errors.comments}</p>
+                )}
               </div>
 
               <div className="pt-4">
