@@ -19,11 +19,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, User, Phone, AlertCircle, QrCode } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-
+import QR from "../assets/NavneetQR.jpg";
+// import { FaWhatsapp } from "react-icons/fa";
 // Add this helper function to format the date
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -50,6 +51,8 @@ export default function RegistrationFormDemo({ courseName }) {
     paid: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
+  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
 
   // Add validation state
   const [errors, setErrors] = useState({
@@ -66,6 +69,71 @@ export default function RegistrationFormDemo({ courseName }) {
   });
 
   // Add validation functions
+  // const validateField = (name, value) => {
+  //   let error = "";
+    
+  //   switch (name) {
+  //     case "fullName":
+  //       if (value.length < 3) {
+  //         error = "Name must be at least 3 characters long";
+  //       } else if (!/^[a-zA-Z\s]*$/.test(value)) {
+  //         error = "Name should only contain letters and spaces";
+  //       }
+  //       break;
+
+  //     case "fatherName":
+  //       if (value.length < 3) {
+  //         error = "Father's name must be at least 3 characters long";
+  //       } else if (!/^[a-zA-Z\s]*$/.test(value)) {
+  //         error = "Name should only contain letters and spaces";
+  //       }
+  //       break;
+
+  //     case "email":
+  //       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+  //         error = "Please enter a valid email address";
+  //       }
+  //       break;
+
+  //     case "mobile":
+  //       if (!/^[6-9]\d{9}$/.test(value)) {
+  //         error = "Please enter a valid number (should start with 6-9 and be 10 digits)";
+  //       }
+  //       break;
+
+  //     case "dob":
+  //       const birthDate = new Date(value);
+  //       const today = new Date();
+  //       const age = today.getFullYear() - birthDate.getFullYear();
+  //       if (age > 60) {
+  //         error = "Age must be less than 60 years";
+  //       }
+  //       break;
+
+  //     case "degree":
+  //       if (value.length < 2) {
+  //         error = "Please enter a valid degree";
+  //       }
+  //       break;
+
+  //     case "subject":
+  //       if (value.length < 2) {
+  //         error = "Please enter a valid subject";
+  //       }
+  //       break;
+
+  //     case "optionalPaper":
+  //       if (value.length < 2) {
+  //         error = "Please enter a valid optional paper";
+  //       }
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+  //   return error;
+  // };
+
   const validateField = (name, value) => {
     let error = "";
     
@@ -95,6 +163,15 @@ export default function RegistrationFormDemo({ courseName }) {
       case "mobile":
         if (!/^[6-9]\d{9}$/.test(value)) {
           error = "Please enter a valid number (should start with 6-9 and be 10 digits)";
+        } else {
+          // Check if mobile number exists for this course in localStorage
+          const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+          const existingRegistration = registrations.find(reg => 
+            reg.mobile === value && reg.courseName === formData.courseName
+          );
+          if (existingRegistration) {
+            error = "This mobile number is already registered for this course";
+          }
         }
         break;
 
@@ -102,8 +179,8 @@ export default function RegistrationFormDemo({ courseName }) {
         const birthDate = new Date(value);
         const today = new Date();
         const age = today.getFullYear() - birthDate.getFullYear();
-        if (age < 18 || age > 60) {
-          error = "Age must be between 18 and 60 years";
+        if (age > 60) {
+          error = "Age must be less than 60 years";
         }
         break;
 
@@ -130,7 +207,6 @@ export default function RegistrationFormDemo({ courseName }) {
     }
     return error;
   };
-
   // Update handleInputChange to include validation
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -232,6 +308,18 @@ export default function RegistrationFormDemo({ courseName }) {
       });
       setErrors({});
 
+      // Close registration dialog and show payment dialog
+      setIsRegisterDialogOpen(false);
+      setShowPaymentDialog(true);
+
+      // After successful registration
+      const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+      registrations.push({
+        mobile: formData.mobile,
+        courseName: formData.courseName
+      });
+      localStorage.setItem('registrations', JSON.stringify(registrations));
+
     } catch (error) {
       console.error("Registration error:", error);
     } finally {
@@ -306,7 +394,7 @@ export default function RegistrationFormDemo({ courseName }) {
         theme="colored"
       /> */}
       
-      <Dialog>
+      <Dialog open={isRegisterDialogOpen} onOpenChange={setIsRegisterDialogOpen}>
         <DialogTrigger asChild>
           <Button className="w-full !gap-5 bg-accent hover:bg-accent/80 text-white">
             Register Now <ArrowRight className="w-4 h-4" />
@@ -420,9 +508,9 @@ export default function RegistrationFormDemo({ courseName }) {
                     errors.dob ? "border-red-500" : ""
                   }`}
                 />
-                <p className="text-xs text-slate-500">
+                {/* <p className="text-xs text-slate-500">
                   You must be between 18-60 years old
-                </p>
+                </p> */}
                 {errors.dob && (
                   <p className="text-xs text-red-500">{errors.dob}</p>
                 )}
@@ -611,6 +699,51 @@ export default function RegistrationFormDemo({ courseName }) {
               </p>
             </form>
           </ScrollArea>
+        </DialogContent>
+      </Dialog>
+
+      {/* Payment Dialog */}
+      <Dialog open={showPaymentDialog} onOpenChange={setShowPaymentDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader className="mx-auto">
+            <DialogTitle className="text-xl font-semibold text-emerald-700 flex items-center gap-2">
+              <QrCode className="w-5 h-5" />
+              Payment Details
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="flex flex-col items-center space-y-6 py-4">
+            {/* QR Code Image */}
+            <div className="bg-white p-4 rounded-lg shadow-sm">
+              <img 
+                src={QR} 
+                alt="Payment QR Code"
+                className="w-[200px] h-[200px] object-contain"
+              />
+            </div>
+
+            {/* Payment Details */}
+            <div className="text-center space-y-3 w-full">
+              <div className="flex items-center justify-center gap-2">
+                <User className="w-4 h-4 text-gray-600" />
+                <p className="font-medium text-gray-900">Navneet Kumar Thakur</p>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <Phone className="w-4 h-4 text-gray-600" />
+                <p className="text-gray-600">+91 7061775363</p>
+              </div>
+            </div>
+
+            {/* Note */}
+            <div className="bg-yellow-50 p-4 rounded-lg w-full">
+              <div className="flex gap-2">
+                <AlertCircle className="w-5 h-5 text-yellow-800 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-yellow-800">
+                  Please complete your payment to confirm your registration. After payment, send the screenshot to our WhatsApp number.
+                </p>
+              </div>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </>

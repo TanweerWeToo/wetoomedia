@@ -23,9 +23,9 @@ export default function Program() {
     },
     {
       id: 2,
-      title: "New Batch",
-      level: "UPSC/PSC Preparation",
-      startDate: "—",
+      title
+      : "New Batch",
+      level: "UPSC/PSC Preparation",startDate: "—",
       year: "2025",
       fee: "—",
       image: upsc,
