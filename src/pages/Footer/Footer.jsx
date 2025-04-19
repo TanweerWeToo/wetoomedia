@@ -160,12 +160,12 @@ export default function Footer() {
             </div>
             <div className="space-y-3">
               <p className="text-sm text-white font-medium mb-3">
-                24/7 Women Helpline Number
+                24/7 Helpline Number
               </p>
-              <a href="tel:+919133305062">
+              <a href="tel:+919773573083">
                 <Button className="gap-2 bg-secondary text-white rounded-full hover:bg-secondary/80 hover:text-white/80 transition-colors">
                   <Phone className="h-4 w-4" />
-                  91333 05062
+                  +919773573083
                 </Button>
               </a>
             </div>
