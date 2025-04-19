@@ -9,15 +9,15 @@ import "react-toastify/dist/ReactToastify.css";
 const contactInfoList = [
   {
     icon: Mail,
-    label: "email@easyfrontend.com",
-    href: "mailto:email@easyfrontend.com",
+    label: "wetoo.media@gmail.com",
+    href: "mailto:wetoo.media@gmail.com",
   },
   {
     icon: Phone,
-    label: "+91 9876543210",
-    href: "callto:+91 9876543210",
+    label: "+91 9773573083",
+    href: "callto:+91 9773573083",
   },
-  { icon: HardDrive, label: "easyfrontend.com", href: "easyfrontend.com" },
+  { icon: HardDrive, label: "www.wetoomedia.com", href: "www.wetoomedia.com" },
 ];
 
 const ContactForm = () => {
