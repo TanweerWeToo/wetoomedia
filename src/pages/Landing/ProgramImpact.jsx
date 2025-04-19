@@ -218,9 +218,11 @@ const ProgramImpact = () => {
                 </div>
               </div>
 
-              <Button className="bg-accent hover:bg-accent/90 text-white font-bold py-6 px-10 text-lg rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2 mx-auto">
-                Enroll Now <ArrowRight className="h-5 w-5" />
-              </Button>
+              <a href="#programs">
+                <Button className="bg-accent hover:bg-accent/90 text-white font-bold py-6 px-10 text-lg rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2 mx-auto">
+                  Enroll Now <ArrowRight className="h-5 w-5" />
+                </Button>
+              </a>
 
               <div className="mt-6 flex items-center justify-center gap-2">
                 <div className="flex -space-x-2">
@@ -256,11 +258,11 @@ const ProgramImpact = () => {
             Limited Time Offer
           </div>
           <p className="text-lg font-semibold text-primary">
-            Only <span className="text-accent font-bold">5 seats</span>{" "}
+            Only <span className="text-accent font-bold">few seats</span>{" "}
             remaining for our next batch!
           </p>
           <p className="text-text/80 mt-2">
-            Enrollment closes on April 15, 2025. Don't miss this opportunity.
+            Enrollment closes on 30th April, 2025. Don't miss this opportunity.
           </p>
         </motion.div>
       </div>
