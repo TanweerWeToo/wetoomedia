@@ -15,9 +15,9 @@ export default function Program() {
       id: 1,
       title: "New Batch",
       level: "RCA Preparation",
-      startDate: "01-04-2025",
+      startDate: "01-05-2025",
       year: "2025",
-      fee: "350/-",
+      fee: "299/-",
       image: rca,
       category: "rca",
     },
@@ -25,7 +25,7 @@ export default function Program() {
       id: 2,
       title
       : "New Batch",
-      level: "UPSC/PSC Preparation",startDate: "—",
+      level: "UPSC Preparation",startDate: "—",
       year: "2025",
       fee: "—",
       image: upsc,
@@ -124,7 +124,7 @@ export default function Program() {
                 value="upsc"
                 className="data-[state=active]:bg-white data-[state=active]:text-[#2A4E6E] text-white"
               >
-                UPSC/PSC
+                UPSC
               </TabsTrigger>
               <TabsTrigger
                 value="bpsc"
