@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -53,7 +53,6 @@ export default function RegistrationFormDemo({ courseName, fee }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
-  const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
 
   // Add validation state
   const [errors, setErrors] = useState({
@@ -69,71 +68,35 @@ export default function RegistrationFormDemo({ courseName, fee }) {
     optionalPaper: "",
   });
 
-  // Add validation functions
-  // const validateField = (name, value) => {
-  //   let error = "";
+  // First, add a new state to track if user is registered
+  const [isUserRegistered, setIsUserRegistered] = useState(false);
 
-  //   switch (name) {
-  //     case "fullName":
-  //       if (value.length < 3) {
-  //         error = "Name must be at least 3 characters long";
-  //       } else if (!/^[a-zA-Z\s]*$/.test(value)) {
-  //         error = "Name should only contain letters and spaces";
-  //       }
-  //       break;
+  // Add this function to check registration status from localStorage
+  const checkRegistrationStatus = (mobileNumber) => {
+    const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+    return registrations.some(reg => 
+      reg.courseName.toLowerCase() === courseName.toLowerCase() && 
+      (mobileNumber ? reg.mobile === mobileNumber : true)
+    );
+  };
 
-  //     case "fatherName":
-  //       if (value.length < 3) {
-  //         error = "Father's name must be at least 3 characters long";
-  //       } else if (!/^[a-zA-Z\s]*$/.test(value)) {
-  //         error = "Name should only contain letters and spaces";
-  //       }
-  //       break;
+  // Add useEffect to check registration status when component mounts
+  useEffect(() => {
+    // Check if any registrations exist for this course
+    const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+    const isRegistered = registrations.some(reg => 
+      reg.courseName.toLowerCase() === courseName.toLowerCase()
+    );
+    setIsUserRegistered(isRegistered);
+  }, [courseName]);
 
-  //     case "email":
-  //       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-  //         error = "Please enter a valid email address";
-  //       }
-  //       break;
-
-  //     case "mobile":
-  //       if (!/^[6-9]\d{9}$/.test(value)) {
-  //         error = "Please enter a valid number (should start with 6-9 and be 10 digits)";
-  //       }
-  //       break;
-
-  //     case "dob":
-  //       const birthDate = new Date(value);
-  //       const today = new Date();
-  //       const age = today.getFullYear() - birthDate.getFullYear();
-  //       if (age > 60) {
-  //         error = "Age must be less than 60 years";
-  //       }
-  //       break;
-
-  //     case "degree":
-  //       if (value.length < 2) {
-  //         error = "Please enter a valid degree";
-  //       }
-  //       break;
-
-  //     case "subject":
-  //       if (value.length < 2) {
-  //         error = "Please enter a valid subject";
-  //       }
-  //       break;
-
-  //     case "optionalPaper":
-  //       if (value.length < 2) {
-  //         error = "Please enter a valid optional paper";
-  //       }
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  //   return error;
-  // };
+  // Modify the existing isAlreadyRegistered function
+  const isAlreadyRegistered = () => {
+    if (!formData.mobile) {
+      return isUserRegistered;
+    }
+    return checkRegistrationStatus(formData.mobile);
+  };
 
   const validateField = (name, value) => {
     let error = "";
@@ -163,16 +126,13 @@ export default function RegistrationFormDemo({ courseName, fee }) {
 
       case "mobile":
         if (!/^[6-9]\d{9}$/.test(value)) {
-          error =
-            "Please enter a valid number (should start with 6-9 and be 10 digits)";
+          error = "Please enter a valid number (should start with 6-9 and be 10 digits)";
         } else {
           // Check if mobile number exists for this course in localStorage
-          const registrations = JSON.parse(
-            localStorage.getItem("registrations") || "[]"
-          );
-          const existingRegistration = registrations.find(
-            (reg) =>
-              reg.mobile === value && reg.courseName === formData.courseName
+          const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+          const existingRegistration = registrations.find(reg => 
+            reg.mobile === value && 
+            reg.courseName.toLowerCase() === courseName.toLowerCase() // Use courseName prop
           );
           if (existingRegistration) {
             error = "This mobile number is already registered for this course";
@@ -219,11 +179,6 @@ export default function RegistrationFormDemo({ courseName, fee }) {
       ...prev,
       [id]: value,
     }));
-
-    // Check registration status when mobile number changes
-    if (id === 'mobile') {
-      setIsAlreadyRegistered(checkRegistrationStatus(value));
-    }
 
     // Validate field and update errors
     const error = validateField(id, value);
@@ -325,14 +280,17 @@ export default function RegistrationFormDemo({ courseName, fee }) {
       setShowPaymentDialog(true);
 
       // After successful registration
-      const registrations = JSON.parse(
-        localStorage.getItem("registrations") || "[]"
-      );
+      const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
       registrations.push({
         mobile: formData.mobile,
-        courseName: formData.courseName,
+        courseName: courseName, // Use courseName prop directly
+        timestamp: new Date().toISOString()
       });
-      localStorage.setItem("registrations", JSON.stringify(registrations));
+      localStorage.setItem('registrations', JSON.stringify(registrations));
+      console.log('New registration added:', {
+        mobile: formData.mobile,
+        courseName: courseName
+      });
     } catch (error) {
       console.error("Registration error:", error);
     } finally {
@@ -391,14 +349,6 @@ export default function RegistrationFormDemo({ courseName, fee }) {
   const minDate = new Date();
   minDate.setFullYear(minDate.getFullYear() - 60);
   const minDateString = minDate.toISOString().split("T")[0];
-
-  // Add this function after the other functions but before the return statement
-  const checkRegistrationStatus = (mobileNumber) => {
-    const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
-    return registrations.some(reg => 
-      reg.mobile === mobileNumber && reg.courseName === courseName
-    );
-  };
 
   return (
     <>
@@ -715,7 +665,7 @@ export default function RegistrationFormDemo({ courseName, fee }) {
                     </span>
                   )}
                 </Button>
-                {isAlreadyRegistered ? (
+                {(isUserRegistered || isAlreadyRegistered()) && (
                   <Button
                     onClick={() => {
                       setShowPaymentDialog(true);
@@ -725,7 +675,7 @@ export default function RegistrationFormDemo({ courseName, fee }) {
                   >
                     Pay Now to confirm registration
                   </Button>
-                ) : null}
+                )}
               </div>
 
               <p className="text-xs text-center text-slate-500 pt-2">
@@ -759,8 +709,7 @@ export default function RegistrationFormDemo({ courseName, fee }) {
 
             <div className="text-center space-y-3 w-full">
               <p className="text-2xl text-gray-600">
-                Course Fee:{" "}
-                <span className="font-medium">₹{fee}</span>
+                Course Fee: <span className="font-medium">₹{fee}</span>
               </p>
             </div>
 
