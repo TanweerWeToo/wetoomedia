@@ -28,13 +28,13 @@ import QR from "../assets/NavneetQR.jpg";
 // Add this helper function to format the date
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
 
-export default function RegistrationFormDemo({ courseName }) {
+export default function RegistrationFormDemo({ courseName, fee }) {
   const [formData, setFormData] = useState({
     fullName: "",
     fatherName: "",
@@ -53,6 +53,7 @@ export default function RegistrationFormDemo({ courseName }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
+  const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
 
   // Add validation state
   const [errors, setErrors] = useState({
@@ -71,7 +72,7 @@ export default function RegistrationFormDemo({ courseName }) {
   // Add validation functions
   // const validateField = (name, value) => {
   //   let error = "";
-    
+
   //   switch (name) {
   //     case "fullName":
   //       if (value.length < 3) {
@@ -136,7 +137,7 @@ export default function RegistrationFormDemo({ courseName }) {
 
   const validateField = (name, value) => {
     let error = "";
-    
+
     switch (name) {
       case "fullName":
         if (value.length < 3) {
@@ -162,12 +163,16 @@ export default function RegistrationFormDemo({ courseName }) {
 
       case "mobile":
         if (!/^[6-9]\d{9}$/.test(value)) {
-          error = "Please enter a valid number (should start with 6-9 and be 10 digits)";
+          error =
+            "Please enter a valid number (should start with 6-9 and be 10 digits)";
         } else {
           // Check if mobile number exists for this course in localStorage
-          const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
-          const existingRegistration = registrations.find(reg => 
-            reg.mobile === value && reg.courseName === formData.courseName
+          const registrations = JSON.parse(
+            localStorage.getItem("registrations") || "[]"
+          );
+          const existingRegistration = registrations.find(
+            (reg) =>
+              reg.mobile === value && reg.courseName === formData.courseName
           );
           if (existingRegistration) {
             error = "This mobile number is already registered for this course";
@@ -215,6 +220,11 @@ export default function RegistrationFormDemo({ courseName }) {
       [id]: value,
     }));
 
+    // Check registration status when mobile number changes
+    if (id === 'mobile') {
+      setIsAlreadyRegistered(checkRegistrationStatus(value));
+    }
+
     // Validate field and update errors
     const error = validateField(id, value);
     setErrors((prev) => ({
@@ -238,12 +248,12 @@ export default function RegistrationFormDemo({ courseName }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     // Validate all fields
     let newErrors = {};
     let hasErrors = false;
-    
-    Object.keys(formData).forEach(key => {
+
+    Object.keys(formData).forEach((key) => {
       if (key !== "comments" && key !== "courseName" && key !== "paid") {
         const error = validateField(key, formData[key]);
         if (error) {
@@ -265,7 +275,7 @@ export default function RegistrationFormDemo({ courseName }) {
       // Create a new object with formatted date
       const formattedData = {
         ...formData,
-        dob: formatDate(formData.dob) // Format the date before sending
+        dob: formatDate(formData.dob), // Format the date before sending
       };
 
       const response = await toast.promise(
@@ -283,7 +293,9 @@ export default function RegistrationFormDemo({ courseName }) {
           success: "Registration successful!",
           error: {
             render({ data }) {
-              const errorMessage = data?.response?.data?.message || "Registration failed. Please try again";
+              const errorMessage =
+                data?.response?.data?.message ||
+                "Registration failed. Please try again";
               return errorMessage;
             },
           },
@@ -313,13 +325,14 @@ export default function RegistrationFormDemo({ courseName }) {
       setShowPaymentDialog(true);
 
       // After successful registration
-      const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+      const registrations = JSON.parse(
+        localStorage.getItem("registrations") || "[]"
+      );
       registrations.push({
         mobile: formData.mobile,
-        courseName: formData.courseName
+        courseName: formData.courseName,
       });
-      localStorage.setItem('registrations', JSON.stringify(registrations));
-
+      localStorage.setItem("registrations", JSON.stringify(registrations));
     } catch (error) {
       console.error("Registration error:", error);
     } finally {
@@ -379,6 +392,14 @@ export default function RegistrationFormDemo({ courseName }) {
   minDate.setFullYear(minDate.getFullYear() - 60);
   const minDateString = minDate.toISOString().split("T")[0];
 
+  // Add this function after the other functions but before the return statement
+  const checkRegistrationStatus = (mobileNumber) => {
+    const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+    return registrations.some(reg => 
+      reg.mobile === mobileNumber && reg.courseName === courseName
+    );
+  };
+
   return (
     <>
       {/* <ToastContainer
@@ -393,10 +414,13 @@ export default function RegistrationFormDemo({ courseName }) {
         pauseOnHover
         theme="colored"
       /> */}
-      
-      <Dialog open={isRegisterDialogOpen} onOpenChange={setIsRegisterDialogOpen}>
+
+      <Dialog
+        open={isRegisterDialogOpen}
+        onOpenChange={setIsRegisterDialogOpen}
+      >
         <DialogTrigger asChild>
-          <Button className="w-full !gap-5 bg-accent hover:bg-accent/80 text-white">
+          <Button className="w-full mt-3 max-[767.5px]:mt-0 !gap-5 bg-accent hover:bg-accent/80 text-white">
             Register Now <ArrowRight className="w-4 h-4" />
           </Button>
         </DialogTrigger>
@@ -691,6 +715,17 @@ export default function RegistrationFormDemo({ courseName }) {
                     </span>
                   )}
                 </Button>
+                {isAlreadyRegistered ? (
+                  <Button
+                    onClick={() => {
+                      setShowPaymentDialog(true);
+                      setIsRegisterDialogOpen(false);
+                    }}
+                    className="w-full mt-2 bg-accent hover:bg-accent/80 text-white"
+                  >
+                    Pay Now to confirm registration
+                  </Button>
+                ) : null}
               </div>
 
               <p className="text-xs text-center text-slate-500 pt-2">
@@ -715,18 +750,27 @@ export default function RegistrationFormDemo({ courseName }) {
           <div className="flex flex-col items-center space-y-6 py-4">
             {/* QR Code Image */}
             <div className="bg-white p-4 rounded-lg shadow-sm">
-              <img 
-                src={QR} 
+              <img
+                src={QR}
                 alt="Payment QR Code"
                 className="w-[200px] h-[200px] object-contain"
               />
             </div>
 
-            {/* Payment Details */}
             <div className="text-center space-y-3 w-full">
+              <p className="text-2xl text-gray-600">
+                Course Fee:{" "}
+                <span className="font-medium">₹{fee}</span>
+              </p>
+            </div>
+
+            {/* Payment Details */}
+            <div className="text-center !mt-3 space-y-3 w-full">
               <div className="flex items-center justify-center gap-2">
                 <User className="w-4 h-4 text-gray-600" />
-                <p className="font-medium text-gray-900">Navneet Kumar Thakur</p>
+                <p className="font-medium text-gray-900">
+                  Navneet Kumar Thakur
+                </p>
               </div>
               <div className="flex items-center justify-center gap-2">
                 <Phone className="w-4 h-4 text-gray-600" />
@@ -739,7 +783,8 @@ export default function RegistrationFormDemo({ courseName }) {
               <div className="flex gap-2">
                 <AlertCircle className="w-5 h-5 text-yellow-800 flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-yellow-800">
-                  Please complete your payment to confirm your registration. After payment, send the screenshot to our WhatsApp number.
+                  Please complete your payment to confirm your registration.
+                  After payment, send the screenshot to our WhatsApp number.
                 </p>
               </div>
             </div>

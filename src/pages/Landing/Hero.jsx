@@ -12,7 +12,7 @@ import {
   ArrowUpRight,
   Sparkles,
 } from "lucide-react";
-import hero from "../../assets/Landing/hero.webp";
+import hero from "../../assets/TanveerSir.webp";
 
 // Compact CountUp component
 const CountUp = ({ end, duration = 2000 }) => {
@@ -346,7 +346,7 @@ const Hero = () => {
                 <a href="#programs">
                   <Button
                     key={idx}
-                    className="relative overflow-hidden bg-gradient-to-br from-secondary px-5 sm:px-8 lg:px-9 via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full py-0 h-9 text-sm font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20"
+                    className="relative overflow-hidden bg-gradient-to-br from-secondary px-5 sm:px-8 lg:px-9 via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full py-0 h-9 text-xs sm:text-sm  font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20"
                     style={{
                       transitionDelay: `${idx * 100}ms`,
                       animation: `fadeSlideIn 0.5s ease-out ${
@@ -402,14 +402,14 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/30 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-500"></div>
 
           {/* Caption with animation */}
-          <div className="absolute bottom-0 left-0 w-full p-4 z-10 transform translate-y-2 group-hover:translate-y-0 opacity-90 group-hover:opacity-100 transition-all duration-500">
+          {/* <div className="absolute bottom-0 left-0 w-full p-4 z-10 transform translate-y-2 group-hover:translate-y-0 opacity-90 group-hover:opacity-100 transition-all duration-500">
             <p className="text-white/90 text-xs font-medium mb-1 transform group-hover:translate-x-2 transition-transform duration-500">
               Watch our showreel
             </p>
             <h3 className="text-white text-base md:text-lg font-bold transform group-hover:translate-x-2 transition-transform duration-500 delay-75">
               How we transform ideas into digital reality
             </h3>
-          </div>
+          </div> */}
 
           {/* Scroll indicator */}
           <div className="absolute hidden sm:flex bottom-4 left-1/2 -translate-x-1/2 flex-col items-center animate-bounce opacity-80">

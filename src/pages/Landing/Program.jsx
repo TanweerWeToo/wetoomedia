@@ -142,21 +142,21 @@ export default function Program() {
           </Tabs>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filteredCourses.map((course) => (
             <Card
               key={course.id}
               className={`bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 transform hover:-translate-y-1`}
             >
-              <div className="flex flex-col md:flex-row gap-5 sm:gap-10">
-                <div className="w-full md:w-1/2 overflow-hidden">
+              <div className="flex flex-col xl:flex-row gap-5 sm:gap-10">
+                <div className="w-full xl:w-1/2 overflow-hidden">
                   <img
                     src={course.image || "/placeholder.svg"}
                     alt={course.title}
                     className="h-full w-full object-cover rounded-lg"
                   />
                 </div>
-                <div className="w-full md:w-1/2 flex flex-col text-white justify-between">
+                <div className="w-full xl:w-1/2 flex flex-col text-white justify-between">
                   <div>
                     <h3 className="text-lg font-bold">{course.title}</h3>
                     <p className="font-medium mt-1 text-white/70">
@@ -177,6 +177,7 @@ export default function Program() {
                   </div>
                   <RegistrationForm 
                     courseName={course.level} 
+                    fee={course.fee}
                     // courseColor={course.category === "rca" ? "blue" : course.category === "upsc" ? "emerald" : "orange"} 
                   />
                   {/* <Button className="mt-4 bg-[#CC5500] hover:bg-[#CC5500]/80 text-white w-full">
