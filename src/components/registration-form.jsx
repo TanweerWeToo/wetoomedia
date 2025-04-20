@@ -53,6 +53,7 @@ export default function RegistrationFormDemo({ courseName, fee }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isRegisterDialogOpen, setIsRegisterDialogOpen] = useState(false);
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
+  const [showComingSoonDialog, setShowComingSoonDialog] = useState(false);
 
   // Add validation state
   const [errors, setErrors] = useState({
@@ -370,321 +371,332 @@ export default function RegistrationFormDemo({ courseName, fee }) {
         onOpenChange={setIsRegisterDialogOpen}
       >
         <DialogTrigger asChild>
-          <Button className="w-full mt-3 max-[767.5px]:mt-0 !gap-5 bg-accent hover:bg-accent/80 text-white">
+          <Button 
+            className="w-full mt-3 max-[767.5px]:mt-0 !gap-5 bg-accent hover:bg-accent/80 text-white"
+            onClick={() => {
+              if (courseName.toLowerCase() !== "rca preparation") {
+                setShowComingSoonDialog(true);
+                return;
+              }
+              setIsRegisterDialogOpen(true);
+            }}
+          >
             Register Now <ArrowRight className="w-4 h-4" />
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-semibold text-emerald-700">
-              Registration Form
-            </DialogTitle>
-            <DialogDescription>
-              Please fill in your details to register for{" "}
-              <span className="font-medium text-emerald-600">{courseName}</span>
-            </DialogDescription>
-          </DialogHeader>
+        {courseName.toLowerCase() === "rca preparation" && (
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-semibold text-emerald-700">
+                Registration Form
+              </DialogTitle>
+              <DialogDescription>
+                Please fill in your details to register for{" "}
+                <span className="font-medium text-emerald-600">{courseName}</span>
+              </DialogDescription>
+            </DialogHeader>
 
-          <ScrollArea type="always" className="h-[70vh]">
-            <form onSubmit={handleSubmit} className="space-y-4 p-1 pr-4">
-              <div className="space-y-2">
-                <Label htmlFor="fullName" className="text-sm font-medium">
-                  Full Name <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="fullName"
-                  value={formData.fullName}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Enter your full name"
-                  className={`focus-visible:ring-emerald-500 ${
-                    errors.fullName ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.fullName && (
-                  <p className="text-xs text-red-500">{errors.fullName}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="fatherName" className="text-sm font-medium">
-                  Father's Name <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="fatherName"
-                  value={formData.fatherName}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Enter your father's name"
-                  className={`focus-visible:ring-emerald-500 ${
-                    errors.fatherName ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.fatherName && (
-                  <p className="text-xs text-red-500">{errors.fatherName}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">
-                  Email Address <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="example@email.com"
-                  className={`focus-visible:ring-emerald-500 ${
-                    errors.email ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.email && (
-                  <p className="text-xs text-red-500">{errors.email}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="mobile" className="text-sm font-medium">
-                  Mobile Number <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="mobile"
-                  type="tel"
-                  value={formData.mobile}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Valid mobile number (10 digits)"
-                  pattern="[6-9][0-9]{9}"
-                  className={`focus-visible:ring-emerald-500 ${
-                    errors.mobile ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.mobile && (
-                  <p className="text-xs text-red-500">{errors.mobile}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="dob" className="text-sm font-medium">
-                  Date of Birth <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="dob"
-                  type="date"
-                  value={formData.dob}
-                  onChange={handleInputChange}
-                  required
-                  min={minDateString}
-                  max={today}
-                  className={`focus-visible:ring-emerald-500 ${
-                    errors.dob ? "border-red-500" : ""
-                  }`}
-                />
-                {/* <p className="text-xs text-slate-500">
-                  You must be between 18-60 years old
-                </p> */}
-                {errors.dob && (
-                  <p className="text-xs text-red-500">{errors.dob}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="state" className="text-sm font-medium">
-                  State <span className="text-red-500">*</span>
-                </Label>
-                <Select
-                  className=""
-                  required
-                  onValueChange={(value) => handleSelectChange("state", value)}
-                  value={formData.state}
-                >
-                  <SelectTrigger className="w-full border bg-background text-foreground shadow-sm focus-visible:ring-emerald-500">
-                    <SelectValue placeholder="Select your state" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    {indianStates.map((state) => (
-                      <SelectItem
-                        key={state}
-                        value={state.toLowerCase().replace(/\s+/g, "-")}
-                        className="hover:bg-gray-100"
-                      >
-                        {state}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {errors.state && (
-                  <p className="text-xs text-red-500">{errors.state}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="degree" className="text-sm font-medium">
-                  Recent Degree/Course Completed{" "}
-                  <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="degree"
-                  value={formData.degree}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="e.g., B.Tech, B.A., M.Sc."
-                  className={`focus-visible:ring-emerald-500 ${
-                    errors.degree ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.degree && (
-                  <p className="text-xs text-red-500">{errors.degree}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="subject" className="text-sm font-medium">
-                  Graduation Subject <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="e.g., Computer Science, Economics"
-                  className={`focus-visible:ring-emerald-500 ${
-                    errors.subject ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.subject && (
-                  <p className="text-xs text-red-500">{errors.subject}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="gradYear" className="text-sm font-medium">
-                  Graduation Year <span className="text-red-500">*</span>
-                </Label>
-                <Select
-                  required
-                  onValueChange={(value) =>
-                    handleSelectChange("gradYear", value)
-                  }
-                  value={formData.gradYear}
-                >
-                  <SelectTrigger className="w-full border bg-background text-foreground shadow-sm focus-visible:ring-emerald-500">
-                    <SelectValue placeholder="Select graduation year" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    {graduationYears.map((year) => (
-                      <SelectItem
-                        key={year}
-                        value={year.toString()}
-                        className="hover:bg-accent"
-                      >
-                        {year}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {errors.gradYear && (
-                  <p className="text-xs text-red-500">{errors.gradYear}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="optionalPaper" className="text-sm font-medium">
-                  Optional Paper for UPSC Exam{" "}
-                  <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="optionalPaper"
-                  value={formData.optionalPaper}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="e.g., Public Administration, Geography"
-                  className={`focus-visible:ring-emerald-500 ${
-                    errors.optionalPaper ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.optionalPaper && (
-                  <p className="text-xs text-red-500">{errors.optionalPaper}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="comments" className="text-sm font-medium">
-                  Comments/Remarks (optional)
-                </Label>
-                <Textarea
-                  id="comments"
-                  value={formData.comments}
-                  onChange={handleInputChange}
-                  placeholder="Any additional information you'd like to share"
-                  className={`min-h-[80px] focus-visible:ring-emerald-500 ${
-                    errors.comments ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.comments && (
-                  <p className="text-xs text-red-500">{errors.comments}</p>
-                )}
-              </div>
-
-              <div className="pt-4">
-                <Button
-                  type="submit"
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg
-                        className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Processing...
-                    </>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      Enroll Now
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
+            <ScrollArea type="always" className="h-[70vh]">
+              <form onSubmit={handleSubmit} className="space-y-4 p-1 pr-4">
+                <div className="space-y-2">
+                  <Label htmlFor="fullName" className="text-sm font-medium">
+                    Full Name <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="fullName"
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Enter your full name"
+                    className={`focus-visible:ring-emerald-500 ${
+                      errors.fullName ? "border-red-500" : ""
+                    }`}
+                  />
+                  {errors.fullName && (
+                    <p className="text-xs text-red-500">{errors.fullName}</p>
                   )}
-                </Button>
-                {(isUserRegistered || isAlreadyRegistered()) && (
-                  <Button
-                    onClick={() => {
-                      setShowPaymentDialog(true);
-                      setIsRegisterDialogOpen(false);
-                    }}
-                    className="w-full mt-2 bg-accent hover:bg-accent/80 text-white"
-                  >
-                    Pay Now to confirm registration
-                  </Button>
-                )}
-              </div>
+                </div>
 
-              <p className="text-xs text-center text-slate-500 pt-2">
-                By registering, you agree to our Terms of Service and Privacy
-                Policy
-              </p>
-            </form>
-          </ScrollArea>
-        </DialogContent>
+                <div className="space-y-2">
+                  <Label htmlFor="fatherName" className="text-sm font-medium">
+                    Father's Name <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="fatherName"
+                    value={formData.fatherName}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Enter your father's name"
+                    className={`focus-visible:ring-emerald-500 ${
+                      errors.fatherName ? "border-red-500" : ""
+                    }`}
+                  />
+                  {errors.fatherName && (
+                    <p className="text-xs text-red-500">{errors.fatherName}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-sm font-medium">
+                    Email Address <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="example@email.com"
+                    className={`focus-visible:ring-emerald-500 ${
+                      errors.email ? "border-red-500" : ""
+                    }`}
+                  />
+                  {errors.email && (
+                    <p className="text-xs text-red-500">{errors.email}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="mobile" className="text-sm font-medium">
+                    Mobile Number <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="mobile"
+                    type="tel"
+                    value={formData.mobile}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Valid mobile number (10 digits)"
+                    pattern="[6-9][0-9]{9}"
+                    className={`focus-visible:ring-emerald-500 ${
+                      errors.mobile ? "border-red-500" : ""
+                    }`}
+                  />
+                  {errors.mobile && (
+                    <p className="text-xs text-red-500">{errors.mobile}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="dob" className="text-sm font-medium">
+                    Date of Birth <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="dob"
+                    type="date"
+                    value={formData.dob}
+                    onChange={handleInputChange}
+                    required
+                    min={minDateString}
+                    max={today}
+                    className={`focus-visible:ring-emerald-500 ${
+                      errors.dob ? "border-red-500" : ""
+                    }`}
+                  />
+                  {/* <p className="text-xs text-slate-500">
+                    You must be between 18-60 years old
+                  </p> */}
+                  {errors.dob && (
+                    <p className="text-xs text-red-500">{errors.dob}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="state" className="text-sm font-medium">
+                    State <span className="text-red-500">*</span>
+                  </Label>
+                  <Select
+                    className=""
+                    required
+                    onValueChange={(value) => handleSelectChange("state", value)}
+                    value={formData.state}
+                  >
+                    <SelectTrigger className="w-full border bg-background text-foreground shadow-sm focus-visible:ring-emerald-500">
+                      <SelectValue placeholder="Select your state" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white">
+                      {indianStates.map((state) => (
+                        <SelectItem
+                          key={state}
+                          value={state.toLowerCase().replace(/\s+/g, "-")}
+                          className="hover:bg-gray-100"
+                        >
+                          {state}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {errors.state && (
+                    <p className="text-xs text-red-500">{errors.state}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="degree" className="text-sm font-medium">
+                    Recent Degree/Course Completed{" "}
+                    <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="degree"
+                    value={formData.degree}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="e.g., B.Tech, B.A., M.Sc."
+                    className={`focus-visible:ring-emerald-500 ${
+                      errors.degree ? "border-red-500" : ""
+                    }`}
+                  />
+                  {errors.degree && (
+                    <p className="text-xs text-red-500">{errors.degree}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="subject" className="text-sm font-medium">
+                    Graduation Subject <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="e.g., Computer Science, Economics"
+                    className={`focus-visible:ring-emerald-500 ${
+                      errors.subject ? "border-red-500" : ""
+                    }`}
+                  />
+                  {errors.subject && (
+                    <p className="text-xs text-red-500">{errors.subject}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="gradYear" className="text-sm font-medium">
+                    Graduation Year <span className="text-red-500">*</span>
+                  </Label>
+                  <Select
+                    required
+                    onValueChange={(value) =>
+                      handleSelectChange("gradYear", value)
+                    }
+                    value={formData.gradYear}
+                  >
+                    <SelectTrigger className="w-full border bg-background text-foreground shadow-sm focus-visible:ring-emerald-500">
+                      <SelectValue placeholder="Select graduation year" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white">
+                      {graduationYears.map((year) => (
+                        <SelectItem
+                          key={year}
+                          value={year.toString()}
+                          className="hover:bg-accent"
+                        >
+                          {year}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {errors.gradYear && (
+                    <p className="text-xs text-red-500">{errors.gradYear}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="optionalPaper" className="text-sm font-medium">
+                    Optional Paper for UPSC Exam{" "}
+                    <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="optionalPaper"
+                    value={formData.optionalPaper}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="e.g., Public Administration, Geography"
+                    className={`focus-visible:ring-emerald-500 ${
+                      errors.optionalPaper ? "border-red-500" : ""
+                    }`}
+                  />
+                  {errors.optionalPaper && (
+                    <p className="text-xs text-red-500">{errors.optionalPaper}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="comments" className="text-sm font-medium">
+                    Comments/Remarks (optional)
+                  </Label>
+                  <Textarea
+                    id="comments"
+                    value={formData.comments}
+                    onChange={handleInputChange}
+                    placeholder="Any additional information you'd like to share"
+                    className={`min-h-[80px] focus-visible:ring-emerald-500 ${
+                      errors.comments ? "border-red-500" : ""
+                    }`}
+                  />
+                  {errors.comments && (
+                    <p className="text-xs text-red-500">{errors.comments}</p>
+                  )}
+                </div>
+
+                <div className="pt-4">
+                  <Button
+                    type="submit"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <svg
+                          className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                        Processing...
+                      </>
+                    ) : (
+                      <span className="flex items-center gap-2">
+                        Enroll Now
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    )}
+                  </Button>
+                  {(isUserRegistered || isAlreadyRegistered()) && (
+                    <Button
+                      onClick={() => {
+                        setShowPaymentDialog(true);
+                        setIsRegisterDialogOpen(false);
+                      }}
+                      className="w-full mt-2 bg-accent hover:bg-accent/80 text-white"
+                    >
+                      Pay Now to confirm registration
+                    </Button>
+                  )}
+                </div>
+
+                <p className="text-xs text-center text-slate-500 pt-2">
+                  By registering, you agree to our Terms of Service and Privacy
+                  Policy
+                </p>
+              </form>
+            </ScrollArea>
+          </DialogContent>
+        )}
       </Dialog>
 
       {/* Payment Dialog */}
@@ -738,6 +750,52 @@ export default function RegistrationFormDemo({ courseName, fee }) {
               </div>
             </div>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Coming Soon Dialog */}
+      <Dialog open={showComingSoonDialog} onOpenChange={setShowComingSoonDialog}>
+        <DialogContent className="sm:max-w-md bg-gradient-to-br from-emerald-50 to-white">
+          <DialogHeader className="space-y-4">
+            <div className="flex flex-col items-center space-y-2">
+              <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8 text-emerald-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <DialogTitle className="text-2xl font-bold text-emerald-700 text-center">
+                Coming Soon!
+              </DialogTitle>
+            </div>
+            <DialogDescription className="text-center space-y-4">
+              <p className="text-gray-600">
+                We're excited to announce that the{" "}
+                <span className="font-semibold text-emerald-600">{courseName}</span>{" "}
+                course is currently in development.
+              </p>
+              <p className="text-gray-600">
+                Stay tuned for updates and be among the first to know when it launches!
+              </p>
+              <Button
+                variant="outline"
+                className="w-full border-emerald-200 text-emerald-600 hover:bg-emerald-50"
+                onClick={() => setShowComingSoonDialog(false)}
+              >
+                Got it, thanks!
+              </Button>
+            </DialogDescription>
+          </DialogHeader>
         </DialogContent>
       </Dialog>
     </>
