@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import telegram from "../../assets/telegram.png";
+import whatsapp from "../../assets/whatsapp.png";
 // import { Link } from "react-router-dom"
 // import aicteapprovals from "@/assets/footer/SSIM-AICTE-EOA-1992-2023.pdf"
 import { Input } from "@/components/ui/input";
@@ -26,9 +28,18 @@ export default function Footer() {
       label: "Blog/News",
       items: [
         { name: "UPSC Preparation Strategy", path: "/about/vision-mission" },
-        { name: "Syllabus & Study Techniques", path: "/about/accreditations-rankings" },
-        { name: "Current Affairs & Government Schemes", path: "/accreditations" },
-        { name: "Success & Interview Guidance", path: "/students-life/life-at-ssim" },
+        {
+          name: "Syllabus & Study Techniques",
+          path: "/about/accreditations-rankings",
+        },
+        {
+          name: "Current Affairs & Government Schemes",
+          path: "/accreditations",
+        },
+        {
+          name: "Success & Interview Guidance",
+          path: "/students-life/life-at-ssim",
+        },
         // { name: "Media", path: "/students-life/news-announcements" },
         // { name: "Blog", path: "/blog" },
         // { name: "Careers", path: "/careers" },
@@ -106,39 +117,41 @@ export default function Footer() {
                   alt="Wetoo Logo"
                   className="h-14 cursor-pointer rounded-full w-auto transition-transform group-hover:scale-95"
                 />
-                <span className="text-base text-white font-bold">We Too Media</span>
+                <span className="text-base text-white font-bold">
+                  We Too Media
+                </span>
               </a>
               <div className="flex gap-3">
                 {[
                   {
-                    icon: Facebook,
-                    bgColor: "bg-blue-600",
-                    label: "Facebook",
-                    href: "#",
+                    icon: telegram,
+                    // bgColor: "bg-blue-600",
+                    label: "Telegram",
+                    href: "https://t.me/wetoomedia",
                   },
                   {
                     icon: Instagram,
                     bgColor: "bg-pink-600",
                     label: "Instagram",
-                    href: "#",
+                    href: "https://www.instagram.com/wetoomedia/",
                   },
                   {
-                    icon: Twitter,
-                    bgColor: "bg-sky-500",
-                    label: "Twitter",
-                    href: "#",
+                    icon: whatsapp,
+                    bgColor: "bg-green-600",
+                    label: "WhatsApp",
+                    href: "https://whatsapp.com/channel/0029VaEhTCNHrDZknwlN5p0F",
                   },
-                  {
-                    icon: Linkedin,
-                    bgColor: "bg-blue-700",
-                    label: "LinkedIn",
-                    href: "#",
-                  },
+                  // {
+                  //   icon: Linkedin,
+                  //   bgColor: "bg-blue-700",
+                  //   label: "LinkedIn",
+                  //   href: "#",
+                  // },
                   {
                     icon: Youtube,
                     bgColor: "bg-red-600",
                     label: "YouTube",
-                    href: "#",
+                    href: "www.youtube.com/@WeTooMedia-IAS",
                   },
                 ].map((social, index) => (
                   <a
@@ -152,7 +165,18 @@ export default function Footer() {
                       className={`rounded-full transition-all hover:scale-110 text-white ${social.bgColor} hover:bg-${social.bgColor}/80`}
                       aria-label={social.label}
                     >
-                      <social.icon className="h-5 w-5" />
+                      {social.label === "Telegram" ||
+                      social.label === "WhatsApp" ? (
+                        <img
+                          src={
+                            social.label === "Telegram" ? telegram : whatsapp
+                          }
+                          alt={social.label}
+                          className="h-10 w-10"
+                        />
+                      ) : (
+                        <social.icon className="h-5 w-5" />
+                      )}
                     </Button>
                   </a>
                 ))}
