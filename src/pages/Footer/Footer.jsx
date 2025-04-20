@@ -127,7 +127,7 @@ export default function Footer() {
                     icon: telegram,
                     // bgColor: "bg-blue-600",
                     label: "Telegram",
-                    href: "https://t.me/wetoomedia",
+                    href: "https://t.me/sfwm786",
                   },
                   {
                     icon: Instagram,
