@@ -12,7 +12,9 @@ const VideoCard = ({ videoId, title }) => (
       />
     </div>
     <div class="block">
-      <h4 class="text-black text-2xl md:text-3xl font-medium leading-8">{title}</h4>
+      <h4 class="text-black text-2xl md:text-3xl font-medium leading-8">
+        {title}
+      </h4>
     </div>
   </div>
 );
@@ -20,15 +22,18 @@ const VideoCard = ({ videoId, title }) => (
 const videos = [
   {
     videoId: "i9V1tYJoqFE", // Replace with your actual YouTube video IDs
-    title: "ना कोई कोचिंग, ना कोई गाइडेंस -Google को बनाय अपना हथियार और बन गई IAS I| HARSHITA SHARMA,AIR 214",
+    title:
+      "ना कोई कोचिंग, ना कोई गाइडेंस -Google को बनाय अपना हथियार और बन गई IAS I| HARSHITA SHARMA,AIR 214",
   },
   {
     videoId: "u4GtKDCOWf8", // Replace with your actual YouTube video IDs
-    title: "SHRUTI SHARMA RANK 1|| Shruti Sharma ने बताया,किस स्ट्रेटजी ने दिलाई उन्हें RANK-1,Strategies & Tips",
+    title:
+      "SHRUTI SHARMA RANK 1|| Shruti Sharma ने बताया,किस स्ट्रेटजी ने दिलाई उन्हें RANK-1,Strategies & Tips",
   },
   {
     videoId: "97aKwDK5ptI", // Replace with your actual YouTube video IDs
-    title: "ना कोई कोचिंग ना कोई गाइडेंस Youtube को बनाय अपना हथियार और बन गई IAS I Shurbhi Goyal AIR 78 UPSC 21",
+    title:
+      "ना कोई कोचिंग ना कोई गाइडेंस Youtube को बनाय अपना हथियार और बन गई IAS I Shurbhi Goyal AIR 78 UPSC 21",
   },
 ];
 
@@ -45,8 +50,9 @@ const YoutubeVideos = () => {
           ))}
         </div>
         <a
-          href="javascript:;"
-          class="cursor-pointer border border-gray-300 shadow-sm rounded-full py-3.5 px-7 w-52 flex justify-center items-center text-gray-900 font-semibold mx-auto transition-all duration-300 hover:bg-gray-100"
+          href="https://www.youtube.com/@WeTooMedia-IAS"
+          target="_blank"
+          class="cursor-pointer border border-gray-300 bg-primary text-white hover:bg-primary/90 hover:text-white shadow-sm rounded-full py-2.5 px-7 w-52 flex justify-center items-center font-semibold mx-auto transition-all duration-300 hover:bg-gray-100"
         >
           Watch More Videos
         </a>
