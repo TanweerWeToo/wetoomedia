@@ -6,12 +6,14 @@ import ProgramImpact from "./ProgramImpact";
 import Testimonial from "./Testimonial";
 import Youtube from "./Youtube";
 import Contact from "./Contact";
+import YoutubeVideos from "./YoutubeVideos";
 const LandingPage = () => {
   return (
     <>
       <Hero />
       <About />
       <Youtube />
+      <YoutubeVideos />
       <Program />
       <ProgramImpact />
       {/* <Testimonial /> */}
