@@ -7,6 +7,8 @@ import Testimonial from "./Testimonial";
 import Youtube from "./Youtube";
 import Contact from "./Contact";
 import YoutubeVideos from "./YoutubeVideos";
+import YoutubeTestimonials from "./YoutubeTestimonials";
+
 const LandingPage = () => {
   return (
     <>
@@ -16,6 +18,7 @@ const LandingPage = () => {
       <YoutubeVideos />
       <Program />
       <ProgramImpact />
+      <YoutubeTestimonials />
       {/* <Testimonial /> */}
       <Contact />
     </>
