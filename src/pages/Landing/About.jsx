@@ -1,14 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Card } from "../../components/ui/card";
 import { Users, GraduationCap, Handshake, BookOpen, Star } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
-import about1 from "../../assets/Landing/about1.webp";
-import about2 from "../../assets/Landing/about2.webp";
-import about3 from "../../assets/Landing/about3.webp";
-import about4 from "../../assets/Landing/about4.webp";
-import about5 from "../../assets/Landing/about5.webp";
-import about6 from "../../assets/Landing/about5+md.webp";
 
 // Custom color palette
 const colors = {
@@ -57,22 +51,7 @@ const metrics = [
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
-  const imageRef = useRef(null);
   const [hoveredCard, setHoveredCard] = useState(null);
-
-  // Parallax effect for the header image
-  const { scrollYProgress } = useScroll({
-    target: imageRef,
-    offset: ["start end", "end start"],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.05, 1]);
-  const opacityOverlay = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [0, 0.1, 0.2]
-  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -115,35 +94,6 @@ export default function About() {
       opacity: 1,
       transition: { duration: 0.5, ease: "easeOut" },
     },
-  };
-
-  const imageVariants = {
-    hidden: { scale: 0.95, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.7, ease: "easeOut" },
-    },
-  };
-
-  const [lightboxImage, setLightboxImage] = useState("");
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-
-  const openLightbox = (imageSrc) => {
-    setLightboxImage(imageSrc);
-    setIsLightboxOpen(true);
-  };
-
-  const closeLightbox = () => {
-    setIsLightboxOpen(false);
-    setLightboxImage("");
-  };
-
-  // Close lightbox when clicking outside the image
-  const handleLightboxClick = (e) => {
-    if (e.target.classList.contains("lightbox")) {
-      closeLightbox();
-    }
   };
 
   return (
@@ -465,123 +415,6 @@ export default function About() {
             </div>
           </motion.div>
         </motion.div>
-
-        <style>
-          {`
-                  .lightbox {
-                    display: none;
-                    position: fixed;
-                    z-index: 999;
-                    top: 0;
-                    left: 0;
-                    width: 100vw;
-                    height: 100vh;
-                    overflow: hidden;
-                    background-color: rgba(0, 0, 0, 0.8);
-                  }
-                  .lightbox.active {
-                    display: flex;
-                  }
-                  .lightbox-image {
-                    display: block;
-                    margin: auto;
-                    max-width: 100%;
-                    max-height: 100%;
-                  }
-                  .close {
-                    color: #fff;
-                    font-size: 3em;
-                    position: absolute;
-                    top: 20px;
-                    right: 30px;
-                    cursor: pointer;
-                  }
-                  .gallery {
-                    width: 90vw;
-                    // max-width: 1200px;
-                    margin: 0 auto;
-                    grid-template-rows: 1fr;
-                    grid-column-gap: 30px;
-                    grid-row-gap: 30px;
-                  }
-                  .gallery img {
-                    max-width: 100%;
-                    cursor: pointer;
-                  }
-                  .gallery img:hover {
-                    max-width: 100%;
-                    cursor: pointer;
-                  }
-                `}
-        </style>
-
-        <section className="">
-          <div className="gallery max-w-7xl mx-auto">
-            <div className="flex flex-col mb-10">
-              <div className="grid grid-cols-2 md:grid-cols-12 gap-8 lg:mb-11 mb-7">
-                <div className="md:col-span-4 md:h-[404px] aspect-square w-full rounded-xl">
-                  <img
-                    src={about1}
-                    alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto lg:col-span-4 md:col-span-6 w-full h-full"
-                    onClick={() => openLightbox(about1)}
-                  />
-                </div>
-                <div className="md:col-span-8 md:h-[404px] aspect-square w-full rounded-xl">
-                  <img
-                    src={about3}
-                    alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto lg:col-span-8 md:col-span-6 w-full h-full block md:hidden"
-                    onClick={() => openLightbox(about3)}
-                  />
-                  <img
-                    src={about6}
-                    alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto lg:col-span-8 md:col-span-6 w-full h-full md:block hidden"
-                    onClick={() => openLightbox(about6)}
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-                <div className="aspect-square w-full rounded-xl">
-                  <img
-                    src={about2}
-                    alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
-                    onClick={() => openLightbox(about2)}
-                  />
-                </div>
-                <div className="aspect-square w-full rounded-xl">
-                  <img
-                    src={about4}
-                    alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
-                    onClick={() => openLightbox(about4)}
-                  />
-                </div>
-                <div className="aspect-square w-full rounded-xl">
-                  <img
-                    src={about5}
-                    alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
-                    onClick={() => openLightbox(about5)}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            className={`lightbox ${isLightboxOpen ? "active" : ""}`}
-            onClick={handleLightboxClick}
-          >
-            <span className="close" onClick={closeLightbox}>
-              &times;
-            </span>
-            <img src={lightboxImage} alt="" className="lightbox-image" />
-          </div>
-        </section>
       </div>
     </div>
   );

@@ -14,6 +14,12 @@ import {
 } from "lucide-react";
 import hero from "../../assets/TanveerSir.webp";
 import { Link } from "react-router-dom";
+import about1 from "../../assets/Landing/about1.webp";
+import about2 from "../../assets/Landing/about2.webp";
+import about3 from "../../assets/Landing/about3.webp";
+import about4 from "../../assets/Landing/about4.webp";
+import about5 from "../../assets/Landing/about5.webp";
+import about6 from "../../assets/Landing/about5+md.webp";
 
 // Compact CountUp component
 const CountUp = ({ end, duration = 2000 }) => {
@@ -133,10 +139,41 @@ const Hero = () => {
     },
   ];
 
+  
+
+  const imageVariants = {
+    hidden: { scale: 0.95, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.7, ease: "easeOut" },
+    },
+  };
+
+  const [lightboxImage, setLightboxImage] = useState("");
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+  const openLightbox = (imageSrc) => {
+    setLightboxImage(imageSrc);
+    setIsLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setIsLightboxOpen(false);
+    setLightboxImage("");
+  };
+
+  // Close lightbox when clicking outside the image
+  const handleLightboxClick = (e) => {
+    if (e.target.classList.contains("lightbox")) {
+      closeLightbox();
+    }
+  };
+
   return (
     <section
       id="hero"
-      className="bg-primary text-white px-5 md:px-8 pb-10 pt-[112px] md:pb-20 md:pt-[136px] relative overflow-hidden"
+      className="bg-primary text-white px-5 md:px-8 pb-10 pt-[112px] md:pb-16 md:pt-[136px] relative overflow-hidden"
     >
       {/* Animated background elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
@@ -388,60 +425,121 @@ const Hero = () => {
         </div>
 
         {/* Team Image Section - Positioned to be partially visible */}
-        <div
-          ref={videoSectionRef}
-          className={`relative w-full rounded-xl overflow-hidden shadow-2xl group transition-all duration-1000 transform ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          } mt-4`}
-          style={{ transitionDelay: "600ms" }}
-        >
-          {/* Decorative elements */}
-          <div className="absolute -top-6 -right-6 w-16 h-16 bg-secondary/30 rounded-full blur-xl z-0 animate-pulse"></div>
-          <div
-            className="absolute -bottom-6 -left-6 w-16 h-16 bg-secondary/20 rounded-full blur-xl z-0 animate-pulse"
-            style={{ animationDelay: "1.5s" }}
-          ></div>
+        <style>
+          {`
+                  .lightbox {
+                    display: none;
+                    position: fixed;
+                    z-index: 999;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    overflow: hidden;
+                    background-color: rgba(0, 0, 0, 0.8);
+                  }
+                  .lightbox.active {
+                    display: flex;
+                  }
+                  .lightbox-image {
+                    display: block;
+                    margin: auto;
+                    max-width: 100%;
+                    max-height: 100%;
+                  }
+                  .close {
+                    color: #fff;
+                    font-size: 3em;
+                    position: absolute;
+                    top: 20px;
+                    right: 30px;
+                    cursor: pointer;
+                  }
+                  .gallery {
+                    width: 90vw;
+                    // max-width: 1200px;
+                    margin: 0 auto;
+                    grid-template-rows: 1fr;
+                    grid-column-gap: 30px;
+                    grid-row-gap: 30px;
+                  }
+                  .gallery img {
+                    max-width: 100%;
+                    cursor: pointer;
+                  }
+                  .gallery img:hover {
+                    max-width: 100%;
+                    cursor: pointer;
+                  }
+                `}
+        </style>
+        <section className="">
+          <div className="gallery max-w-7xl mx-auto">
+            <div className="flex flex-col mb-10">
+              <div className="grid grid-cols-2 md:grid-cols-12 gap-8 lg:mb-11 mb-7">
+                <div className="md:col-span-4 md:h-[404px] aspect-square w-full rounded-xl">
+                  <img
+                    src={about1}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto lg:col-span-4 md:col-span-6 w-full h-full"
+                    onClick={() => openLightbox(about1)}
+                  />
+                </div>
+                <div className="md:col-span-8 md:h-[404px] aspect-square w-full rounded-xl">
+                  <img
+                    src={about3}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto lg:col-span-8 md:col-span-6 w-full h-full block md:hidden"
+                    onClick={() => openLightbox(about3)}
+                  />
+                  <img
+                    src={about6}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto lg:col-span-8 md:col-span-6 w-full h-full md:block hidden"
+                    onClick={() => openLightbox(about6)}
+                  />
+                </div>
+              </div>
 
-          <img
-            src={hero}
-            alt="Team collaboration"
-            className="w-full h-full object-cover rounded-xl transition-transform duration-700 group-hover:scale-105"
-          />
-
-          {/* Sleeker Play Button */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary hover:bg-secondary/90 text-white w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 shadow-lg group-hover:shadow-secondary/30 z-10 group/play">
-            <div className="relative">
-              <Play className="w-5 h-5 ml-0.5 group-hover/play:scale-110 transition-transform" />
-              <span className="absolute inset-0 rounded-full animate-ping bg-secondary/30 w-full h-full"></span>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div className="aspect-square w-full rounded-xl">
+                  <img
+                    src={about2}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about2)}
+                  />
+                </div>
+                <div className="aspect-square w-full rounded-xl">
+                  <img
+                    src={about4}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about4)}
+                  />
+                </div>
+                <div className="aspect-square w-full rounded-xl">
+                  <img
+                    src={about5}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about5)}
+                  />
+                </div>
+              </div>
             </div>
-
-            {/* Ripple effect */}
-            <span className="absolute inset-0 rounded-full animate-ripple opacity-0 group-hover/play:opacity-100 border-2 border-white/30"></span>
-            <span
-              className="absolute inset-0 rounded-full animate-ripple opacity-0 group-hover/play:opacity-100 border-2 border-white/30"
-              style={{ animationDelay: "0.5s" }}
-            ></span>
           </div>
 
-          {/* Enhanced overlay gradient with animation */}
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/30 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-500"></div>
-
-          {/* Caption with animation */}
-          {/* <div className="absolute bottom-0 left-0 w-full p-4 z-10 transform translate-y-2 group-hover:translate-y-0 opacity-90 group-hover:opacity-100 transition-all duration-500">
-            <p className="text-white/90 text-xs font-medium mb-1 transform group-hover:translate-x-2 transition-transform duration-500">
-              Watch our showreel
-            </p>
-            <h3 className="text-white text-base md:text-lg font-bold transform group-hover:translate-x-2 transition-transform duration-500 delay-75">
-              How we transform ideas into digital reality
-            </h3>
-          </div> */}
-
-          {/* Scroll indicator */}
-          <div className="absolute hidden sm:flex bottom-4 left-1/2 -translate-x-1/2 flex-col items-center animate-bounce opacity-80">
-            <p className="text-white text-xs mb-1">Scroll to explore</p>
-            <ChevronRight className="w-4 h-4 text-white transform rotate-90" />
+          <div
+            className={`lightbox ${isLightboxOpen ? "active" : ""}`}
+            onClick={handleLightboxClick}
+          >
+            <span className="close" onClick={closeLightbox}>
+              &times;
+            </span>
+            <img src={lightboxImage} alt="" className="lightbox-image" />
           </div>
-        </div>
+        </section>
       </div>
 
       {/* CSS Animations */}
