@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
@@ -14,31 +15,42 @@ import {
 const navlinks = [
   {
     name: "Home",
-    path: "#hero",
+    path: "/",
+    isRoute: true,
   },
   {
     name: "About",
     path: "#about",
+    isRoute: false,
   },
   {
     name: "Programs",
     path: "#programs",
+    isRoute: false,
+  },
+  {
+    name: "Services",
+    path: "/services",
+    isRoute: true,
   },
   {
     name: "Testimonials",
     path: "#testimonials",
+    isRoute: false,
   },
   {
     name: "Youtube",
     path: "#youtube",
+    isRoute: false,
   },
   {
     name: "Contact",
     path: "#contact",
+    isRoute: false,
   },
 ];
 
-const Drawer = ({ isScrolled }) => {
+const Drawer = ({ isScrolled, isServicesPage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = (e, targetId) => {
@@ -50,13 +62,18 @@ const Drawer = ({ isScrolled }) => {
     }
   };
 
+  // Determine button text color based on services page or scroll state
+  const getButtonTextColor = () => {
+    if (isServicesPage) return 'text-black';
+    if (isScrolled) return 'text-black';
+    return 'text-white';
+  };
+
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger className="lg:hidden block">
         <button
-          className={`p-2 rounded lg:hidden ${
-            isScrolled ? "text-black" : "text-white"
-          }`}
+          className={`p-2 rounded lg:hidden ${getButtonTextColor()}`}
         >
           <svg
             className="w-6 h-6"
@@ -83,13 +100,23 @@ const Drawer = ({ isScrolled }) => {
               <ul className="space-y-1">
                 {navlinks.map((item, index) => (
                   <li key={index}>
-                    <a
-                      href={item.path}
-                      onClick={(e) => handleClick(e, item.path)}
-                      className="block py-2 px-4 font-semibold text-white tracking-wider hover:bg-white/10 rounded transition-colors"
-                    >
-                      {item.name}
-                    </a>
+                    {item.isRoute ? (
+                      <Link
+                        to={item.path}
+                        onClick={() => setIsOpen(false)}
+                        className="block py-2 px-4 font-semibold text-white tracking-wider hover:bg-white/10 rounded transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    ) : (
+                      <a
+                        href={item.path}
+                        onClick={(e) => handleClick(e, item.path)}
+                        className="block py-2 px-4 font-semibold text-white tracking-wider hover:bg-white/10 rounded transition-colors"
+                      >
+                        {item.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

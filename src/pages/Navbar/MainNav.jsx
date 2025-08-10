@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Home,
   Building2,
@@ -6,43 +7,56 @@ import {
   Sparkles,
   Contact,
   Play,
+  Settings,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
 const menuItems = [
   {
     trigger: "Home",
-    path: "#hero",
+    path: "/",
     icon: <Home className="w-4 h-4 mr-2" />,
+    isRoute: true,
   },
   {
     trigger: "About",
     path: "#about", 
     icon: <Building2 className="w-4 h-4 mr-2" />,
+    isRoute: false,
   },
   {
     trigger: "Programs",
     path: "#programs",
     icon: <GraduationCap className="w-4 h-4 mr-2" />,
+    isRoute: false,
+  },
+  {
+    trigger: "Services",
+    path: "/services",
+    icon: <Settings className="w-4 h-4 mr-2" />,
+    isRoute: true,
   },
   {
     trigger: "Testimonials",
     path: "#testimonials",
     icon: <Sparkles className="w-4 h-4 mr-2" />,
+    isRoute: false,
   },
   {
     trigger: "Youtube",
     path: "#youtube",
     icon: <Play className="w-4 h-4 mr-2" />,
+    isRoute: false,
   },
   {
     trigger: "Contact",
     path: "#contact",
     icon: <Contact className="w-4 h-4 mr-2" />,
+    isRoute: false,
   }
 ];
 
-const MainNav = ({ isScrolled }) => {
+const MainNav = ({ isScrolled, isServicesPage }) => {
   const handleClick = (e, targetId) => {
     e.preventDefault();
     const element = document.querySelector(targetId);
@@ -51,33 +65,49 @@ const MainNav = ({ isScrolled }) => {
     }
   };
 
+  // Determine text color based on services page or scroll state
+  const getTextColor = () => {
+    if (isServicesPage) return 'text-black';
+    if (isScrolled) return 'text-black';
+    return 'text-white';
+  };
+
   return (
     <nav className="hidden lg:block">
       <ul className="relative z-20 flex space-x-6">
         {menuItems.map((menu) => (
           <li
             key={menu.trigger}
-            className={`relative group text-sm hover:text-secondary duration-300 transition-all cursor-pointer hover:-translate-y-1 ${
-              isScrolled ? 'text-black' : 'text-white'
-            }`}
+            className={`relative group text-sm hover:text-secondary duration-300 transition-all cursor-pointer hover:-translate-y-1`}
           >
-            <a
-              href={menu.path}
-              onClick={(e) => handleClick(e, menu.path)}
-              className={`text-foreground hover:text-secondary ${
-                isScrolled ? 'text-black' : 'text-white'
-              }`}
-            >
-              <motion.div
-                transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                className={`flex items-center hover:text-secondary duration-100 transition-all cursor-pointer hover:-translate-y-1 p-2 rounded-md hover:bg-gray-100 font-serif text-base ${
-                  isScrolled ? 'text-black' : 'text-white'
-                }`}
+            {menu.isRoute ? (
+              <Link
+                to={menu.path}
+                className={`text-foreground hover:text-secondary ${getTextColor()}`}
               >
-                {menu.icon}
-                {menu.trigger}
-              </motion.div>
-            </a>
+                <motion.div
+                  transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                  className={`flex items-center hover:text-secondary duration-100 transition-all cursor-pointer hover:-translate-y-1 p-2 rounded-md hover:bg-gray-100 font-serif text-base ${getTextColor()}`}
+                >
+                  {menu.icon}
+                  {menu.trigger}
+                </motion.div>
+              </Link>
+            ) : (
+              <a
+                href={menu.path}
+                onClick={(e) => handleClick(e, menu.path)}
+                className={`text-foreground hover:text-secondary ${getTextColor()}`}
+              >
+                <motion.div
+                  transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                  className={`flex items-center hover:text-secondary duration-100 transition-all cursor-pointer hover:-translate-y-1 p-2 rounded-md hover:bg-gray-100 font-serif text-base ${getTextColor()}`}
+                >
+                  {menu.icon}
+                  {menu.trigger}
+                </motion.div>
+              </a>
+            )}
           </li>
         ))}
       </ul>

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/Landing/LandingPage";
 import Navbar from "./pages/Navbar/Navbar";
 import Footer from "./pages/Footer/Footer";
+import Services from "./pages/Services/Services";
+import NotFound from "./components/NotFound";
 import { ArrowUp } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,28 +25,37 @@ const App = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
 
   return (
     <>
       <Navbar />
-      <LandingPage />
-      <Footer />
       
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/services" element={<Services />} />
+        {/* Add more routes here as needed */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      
+      <Footer />
+
       {/* Scroll to top button */}
       <button
         onClick={scrollToTop}
         className={`fixed bottom-8 right-8 p-2 animate-bounce rounded-full bg-accent text-white shadow-lg transition-all duration-1000 hover:bg-accent/90 ${
-          showScrollButton ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          showScrollButton
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10"
         }`}
         style={{ zIndex: 999 }}
         aria-label="Scroll to top"
       >
         <ArrowUp className="w-5 h-5" />
       </button>
-      
+
       {/* Add ToastContainer once at the root level */}
       <ToastContainer
         position="top-right"
