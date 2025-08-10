@@ -13,6 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import hero from "../../assets/TanveerSir.webp";
+import { Link } from "react-router-dom";
 
 // Compact CountUp component
 const CountUp = ({ end, duration = 2000 }) => {
@@ -212,7 +213,7 @@ const Hero = () => {
                 </Button>
               </a>
 
-              <a href="#programs">
+              <Link to="/services">
                 <Button
                   variant="outline"
                   className="relative overflow-hidden bg-white/5 hover:bg-white/10 text-white border-white/20 rounded-full px-5 py-0 h-9 text-sm font-medium backdrop-blur-sm transition-all duration-300 hover:border-white/40 group"
@@ -226,7 +227,7 @@ const Hero = () => {
                     </span>
                   </span>
                 </Button>
-              </a>
+              </Link>
             </div>
 
             {/* Animated testimonial highlights - more compact */}
@@ -287,6 +288,30 @@ const Hero = () => {
             }`}
             style={{ transitionDelay: "300ms" }}
           >
+            <div className="mb-4 flex flex-wrap gap-1.5">
+              {[
+                // "RCA",
+                { label: "WETOOMEDIA ACADEMY", link: "/academy" },
+                { label: "WETOOMEDIA SERVICES", link: "/services" },
+                { label: "CIVIL SERVANT MATRIMONIAL", link: "/matrimonial" },
+                // "MORE"
+              ].map((item, idx) => (
+                <Link to={item.link}>
+                  <Button
+                    key={idx}
+                    className="relative overflow-hidden bg-gradient-to-br from-secondary px-4 sm:px-8 lg:px-[58px] via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full py-0 h-9 sm:h-12 text-xs sm:text-lg  font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20"
+                    style={{
+                      transitionDelay: `${idx * 100}ms`,
+                      animation: `fadeSlideIn 0.5s ease-out ${
+                        idx * 100 + 600
+                      }ms both`,
+                    }}
+                  >
+                      {item.label}
+                  </Button>
+                </Link>
+              ))}
+            </div>
             <p className="text-white/90 text-base md:text-[17px] leading-relaxed mb-6 max-w-xl">
               Our journey began with a passion for{" "}
               <span className="text-secondary font-medium">
@@ -335,7 +360,7 @@ const Hero = () => {
             </div>
 
             {/* Animated skill tags - more compact */}
-            <div className="mt-4 flex flex-wrap gap-1.5">
+            {/* <div className="mt-4 flex flex-wrap gap-1.5">
               {[
                 "RCA",
                 "BPSC",
@@ -358,7 +383,7 @@ const Hero = () => {
                   </Button>
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
 
