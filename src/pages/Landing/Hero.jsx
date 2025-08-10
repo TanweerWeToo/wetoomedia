@@ -158,6 +158,30 @@ const Hero = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
+        <div className="mb-8 flex flex-wrap gap-1.5 md:gap-12 lg:gap-16 sm:justify-center">
+          {[
+            // "RCA",
+            { label: "WETOOMEDIA ACADEMY", link: "/academy" },
+            { label: "WETOOMEDIA SERVICES", link: "/services" },
+            { label: "CIVIL SERVANT MATRIMONIAL", link: "/matrimonial" },
+            // "MORE"
+          ].map((item, idx) => (
+            <Link to={item.link}>
+              <Button
+                key={idx}
+                className="relative overflow-hidden bg-gradient-to-br from-secondary px-4 sm:px-8 lg:px-20 via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full py-0 h-9 sm:h-12 text-xs sm:text-lg  font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20"
+                style={{
+                  transitionDelay: `${idx * 100}ms`,
+                  animation: `fadeSlideIn 0.5s ease-out ${
+                    idx * 100 + 600
+                  }ms both`,
+                }}
+              >
+                {item.label}
+              </Button>
+            </Link>
+          ))}
+        </div>
         {/* Main Content - Responsive layout with entrance animations */}
         <div className="flex flex-col lg:flex-row gap-6 md:gap-10 lg:gap-16 mb-10 md:mb-14">
           {/* Left Column */}
@@ -288,30 +312,6 @@ const Hero = () => {
             }`}
             style={{ transitionDelay: "300ms" }}
           >
-            <div className="mb-4 flex flex-wrap gap-1.5">
-              {[
-                // "RCA",
-                { label: "WETOOMEDIA ACADEMY", link: "/academy" },
-                { label: "WETOOMEDIA SERVICES", link: "/services" },
-                { label: "CIVIL SERVANT MATRIMONIAL", link: "/matrimonial" },
-                // "MORE"
-              ].map((item, idx) => (
-                <Link to={item.link}>
-                  <Button
-                    key={idx}
-                    className="relative overflow-hidden bg-gradient-to-br from-secondary px-4 sm:px-8 lg:px-[58px] via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full py-0 h-9 sm:h-12 text-xs sm:text-lg  font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20"
-                    style={{
-                      transitionDelay: `${idx * 100}ms`,
-                      animation: `fadeSlideIn 0.5s ease-out ${
-                        idx * 100 + 600
-                      }ms both`,
-                    }}
-                  >
-                      {item.label}
-                  </Button>
-                </Link>
-              ))}
-            </div>
             <p className="text-white/90 text-base md:text-[17px] leading-relaxed mb-6 max-w-xl">
               Our journey began with a passion for{" "}
               <span className="text-secondary font-medium">
