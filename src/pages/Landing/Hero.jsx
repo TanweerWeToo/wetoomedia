@@ -172,7 +172,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="bg-primary text-white px-5 md:px-8 pb-10 pt-[192px] md:pb-16 md:pt-[188px] relative overflow-hidden"
+      className="bg-primary text-white px-5 md:px-8 pb-10 pt-[164px] md:pb-16 md:pt-[188px] relative overflow-hidden"
     >
       {/* Animated background elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
@@ -500,8 +500,32 @@ const Hero = () => {
                     onClick={() => openLightbox(about2)}
                   />
                 </div>
+                <div className="block sm:hidden aspect-square w-full rounded-xl">
+                  <img
+                    src={about5}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about5)}
+                  />
+                </div>
+                <div className="block sm:hidden aspect-square w-full rounded-xl">
+                  <img
+                    src={jamia}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(jamia)}
+                  />
+                </div>
+                <div className="block sm:hidden aspect-square w-full rounded-xl">
+                  <img
+                    src={about3}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about3)}
+                  />
+                </div>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+              <div className="hidden sm:grid grid-cols-2 md:grid-cols-3 gap-8">
                 <div className="aspect-square w-full rounded-xl">
                   <img
                     src={about5}

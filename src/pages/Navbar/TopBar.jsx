@@ -8,7 +8,7 @@ export default function TopBar() {
         <div className="flex items-center flex-wrap sm:space-x-4 sm:mb-0">
           <a
             href="mailto:wetoo.media@gmail.com"
-            className="flex items-center mr-2 sm:mr-0 hover:text-white/80"
+            className="hidden sm:flex items-center mr-2 sm:mr-0 hover:text-white/80"
           >
             <Mail className="hidden sm:block h-4 w-4 mr-2" />
             wetoo.media@gmail.com
@@ -17,7 +17,7 @@ export default function TopBar() {
             href="tel:+919773573083"
             className="flex items-center hover:text-white/80"
           >
-            <Phone className="hidden sm:block h-4 w-4 mr-2" />
+            <Phone className="h-4 w-4 mr-2" />
             +91 9773573083
           </a>
         </div>
@@ -38,12 +38,12 @@ export default function TopBar() {
           {/* <Link to="/blog" className="hover:text-yellow-400">
             Blog
           </Link> */}
-          <div className="grid grid-cols-2 w-full sm:w-auto sm:mt-2 sm:mt-0 sm:flex sm:space-x-4">
+          <div className="grid sm:grid-cols-2 w-auto sm:mt-2  sm:flex sm:space-x-4">
             <a
               href="/#contact"
               className="sm:bg-primary flex items-center justify-center text-white sm:px-4 sm:py-1 rounded-md sm:hover:bg-primary/80 hover:text-white/80"
             >
-              <SquareUser className="hidden sm:block h-4 w-4 mr-2" />
+              <SquareUser className="h-4 w-4 mr-2" />
               Contact Us
             </a>
 
