@@ -8,6 +8,7 @@ import NotFound from "./components/NotFound";
 import { ArrowUp } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TopBar from "./pages/Navbar/TopBar";
 
 const App = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -31,15 +32,16 @@ const App = () => {
 
   return (
     <>
+      {/* <TopBar /> */}
       <Navbar />
-      
+
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/services" element={<Services />} />
         {/* Add more routes here as needed */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-      
+
       <Footer />
 
       {/* Scroll to top button */}

@@ -3,6 +3,7 @@ import logo from "@/assets/wetoo-logo.jpg";
 import Drawer from "./Drawer";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import TopBar from "./TopBar";
 
 export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
@@ -47,6 +48,7 @@ export default function Navbar() {
         isVisible ? "top-0 translate-y-0" : "-translate-y-full"
       } ${getNavbarStyling()}`}
     >
+      <TopBar />
       <div className="sm:container md:max-w-6xl lg:max-w-[1400px] mx-auto py-1">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center overflow-hidden">

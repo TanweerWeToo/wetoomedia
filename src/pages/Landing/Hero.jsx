@@ -172,7 +172,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="bg-primary text-white px-5 md:px-8 pb-10 pt-[112px] md:pb-16 md:pt-[136px] relative overflow-hidden"
+      className="bg-primary text-white px-5 md:px-8 pb-10 pt-[192px] md:pb-16 md:pt-[188px] relative overflow-hidden"
     >
       {/* Animated background elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
