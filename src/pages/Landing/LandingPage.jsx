@@ -14,11 +14,11 @@ const LandingPage = () => {
     <>
       <Hero />
       <About />
+      <YoutubeTestimonials />
       <Youtube />
       <YoutubeVideos />
       <Program />
       <ProgramImpact />
-      <YoutubeTestimonials />
       {/* <Testimonial /> */}
       <Contact />
     </>

@@ -20,6 +20,7 @@ import about3 from "../../assets/Landing/about3.webp";
 import about4 from "../../assets/Landing/about4.webp";
 import about5 from "../../assets/Landing/about5.webp";
 import about6 from "../../assets/Landing/about5+md.webp";
+import jamia from "../../assets/Landing/jamia.webp";
 
 // Compact CountUp component
 const CountUp = ({ end, duration = 2000 }) => {
@@ -139,8 +140,6 @@ const Hero = () => {
     },
   ];
 
-  
-
   const imageVariants = {
     hidden: { scale: 0.95, opacity: 0 },
     visible: {
@@ -198,7 +197,7 @@ const Hero = () => {
         <div className="mb-8 flex flex-wrap gap-1.5 md:gap-12 lg:gap-16 sm:justify-center">
           {[
             // "RCA",
-            { label: "WETOOMEDIA ACADEMY", link: "/academy" },
+            { label: "COACHING & CLASSES", link: "/academy" },
             { label: "WETOOMEDIA SERVICES", link: "/services" },
             { label: "CIVIL SERVANT MATRIMONIAL", link: "/matrimonial" },
             // "MORE"
@@ -206,7 +205,7 @@ const Hero = () => {
             <Link to={item.link}>
               <Button
                 key={idx}
-                className="relative overflow-hidden bg-gradient-to-br from-secondary px-4 sm:px-8 lg:px-20 via-secondary to-secondary/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded-full py-0 h-9 sm:h-12 text-xs sm:text-lg  font-medium group transition-all duration-300 shadow-md shadow-secondary/20 hover:shadow-secondary/30 hover:shadow-lg border border-secondary/20"
+                className="relative overflow-hidden bg-gradient-to-br from-accent px-4 sm:px-8 lg:px-20 via-accent to-accent/80 hover:from-secondary hover:via-secondary/90 hover:to-secondary/70 text-white rounded py-0 h-9 sm:h-12 text-xs sm:text-lg  font-medium group transition-all duration-300 shadow-md shadow-accent/20 hover:shadow-secondary/30 hover:shadow-lg border border-accent/20 hover:border-secondary/20"
                 style={{
                   transitionDelay: `${idx * 100}ms`,
                   animation: `fadeSlideIn 0.5s ease-out ${
@@ -362,7 +361,7 @@ const Hero = () => {
               to help students gain admission to prestigious institutions and
               prepare for competitive exams like{" "}
               <span className="text-secondary font-medium">
-                UPSC, SSC, NEET, and Judiciary examinations.
+                UPSC CSE,NEET & Judiciary examinations.
               </span>
             </p>
 
@@ -476,13 +475,65 @@ const Hero = () => {
         <section className="">
           <div className="gallery max-w-7xl mx-auto">
             <div className="flex flex-col mb-10">
-              <div className="grid grid-cols-2 md:grid-cols-12 gap-8 lg:mb-11 mb-7">
-                <div className="md:col-span-4 md:h-[404px] aspect-square w-full rounded-xl">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 lg:mb-11 mb-7">
+                <div className="aspect-square w-full rounded-xl">
                   <img
                     src={about1}
                     alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto lg:col-span-4 md:col-span-6 w-full h-full"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
                     onClick={() => openLightbox(about1)}
+                  />
+                </div>
+                <div className="aspect-square w-full rounded-xl">
+                  <img
+                    src={about4}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about4)}
+                  />
+                </div>
+                <div className="aspect-square w-full rounded-xl">
+                  <img
+                    src={about2}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about2)}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div className="aspect-square w-full rounded-xl">
+                  <img
+                    src={about5}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about5)}
+                  />
+                </div>
+                <div className="aspect-square w-full rounded-xl">
+                  <img
+                    src={jamia}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(jamia)}
+                  />
+                </div>
+                <div className="aspect-square w-full rounded-xl">
+                  <img
+                    src={about3}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
+                    onClick={() => openLightbox(about3)}
+                  />
+                </div>
+              </div>
+              {/* <div className="grid grid-cols-2 md:grid-cols-12 gap-8">
+                <div className="md:col-span-4 md:h-[404px] aspect-square w-full rounded-xl">
+                  <img
+                    src={about2}
+                    alt="Gallery image"
+                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto lg:col-span-4 md:col-span-6 w-full h-full"
+                    onClick={() => openLightbox(about2)}
                   />
                 </div>
                 <div className="md:col-span-8 md:h-[404px] aspect-square w-full rounded-xl">
@@ -499,34 +550,7 @@ const Hero = () => {
                     onClick={() => openLightbox(about6)}
                   />
                 </div>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-                <div className="aspect-square w-full rounded-xl">
-                  <img
-                    src={about2}
-                    alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
-                    onClick={() => openLightbox(about2)}
-                  />
-                </div>
-                <div className="aspect-square w-full rounded-xl">
-                  <img
-                    src={about4}
-                    alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
-                    onClick={() => openLightbox(about4)}
-                  />
-                </div>
-                <div className="aspect-square w-full rounded-xl">
-                  <img
-                    src={about5}
-                    alt="Gallery image"
-                    className="gallery-image object-cover rounded-xl transition-all duration-700 ease-in-out mx-auto w-full h-full"
-                    onClick={() => openLightbox(about5)}
-                  />
-                </div>
-              </div>
+              </div> */}
             </div>
           </div>
 

@@ -9,15 +9,15 @@ export default function Navbar() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  
+
   // Check if we're on the services page
-  const isServicesPage = location.pathname === '/services';
+  const isServicesPage = location.pathname === "/services";
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       const heroHeight = window.innerHeight / 2; // Half of viewport height
-      
+
       // Add delay using setTimeout
       setTimeout(() => {
         setIsVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
@@ -26,25 +26,25 @@ export default function Navbar() {
       }, 100); // 100ms delay
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
 
   // Determine navbar styling based on route and scroll state
   const getNavbarStyling = () => {
     if (isServicesPage) {
-      return 'bg-white text-black shadow-md';
+      return "bg-white text-black shadow-md";
     }
     if (isScrolled) {
-      return 'bg-white/70 text-black';
+      return "bg-white/70 text-black";
     }
-    return 'bg-transparent text-white';
+    return "bg-transparent text-white";
   };
 
   return (
-    <header 
+    <header
       className={`shadow-sm z-50 backdrop-blur-sm transition-all duration-500 fixed w-full ${
-        isVisible ? 'top-0 translate-y-0' : '-translate-y-full'
+        isVisible ? "top-0 translate-y-0" : "-translate-y-full"
       } ${getNavbarStyling()}`}
     >
       <div className="sm:container md:max-w-6xl lg:max-w-[1400px] mx-auto py-1">
@@ -55,8 +55,12 @@ export default function Navbar() {
               alt="Wetoo Logo"
               className="p-2 rounded-full h-[70px]"
             />
-            <span className={`text-base font-bold ${isServicesPage ? 'text-black' : ''}`}>
-              We Too Media
+            <span
+              className={`text-base font-bold ${
+                isServicesPage ? "text-black" : ""
+              }`}
+            >
+              WETOO MEDIA <br /> FOUNDATION
             </span>
           </Link>
           <MainNav isScrolled={isScrolled} isServicesPage={isServicesPage} />
