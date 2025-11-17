@@ -197,9 +197,9 @@ const Hero = () => {
         <div className="mb-8 flex flex-wrap gap-1.5 md:gap-12 lg:gap-16 sm:justify-center">
           {[
             // "RCA",
-            { label: "COACHING & CLASSES", link: "/academy" },
+            { label: "COACHING & CLASSES", link: "https://class.wetoomedia.com/" },
             { label: "WETOOMEDIA SERVICES", link: "/services" },
-            { label: "CIVIL SERVANT MATRIMONIAL", link: "/matrimonial" },
+            // { label: "CIVIL SERVANT MATRIMONIAL", link: "/#" },
             // "MORE"
           ].map((item, idx) => (
             <Link to={item.link}>
